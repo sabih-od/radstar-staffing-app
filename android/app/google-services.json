@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "491638984679",
+    "project_id": "radstar-staffing-96786",
+    "storage_bucket": "radstar-staffing-96786.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:491638984679:android:ffafcb38dfcd888a233742",
+        "android_client_info": {
+          "package_name": "com.radstarstaffing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "491638984679-1tpkle23f2j35ecdd38t3ivrf4e199oj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5jzREZgI2RrZ-bTJANotCuL3_jUzD6C8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "491638984679-1tpkle23f2j35ecdd38t3ivrf4e199oj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
