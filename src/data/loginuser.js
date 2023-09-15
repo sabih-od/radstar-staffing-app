@@ -47,13 +47,35 @@ export const candidate = {
     career_level: 3,
     experience: 3,
     dateofbirth: '1997-02-23',
-    nationality: 1,
+    nationality: 12,
     national_id: '7928-7312-3719-2',
     street_address: 'Serenica Tranquilis Harmonyville, USA',
     functional_area: 34,
     country: 9,
     state: 1,
     city: 1,
+    experience: [
+        { title: 'Physician', company: 'VitalMed Group', startdate: '2023-01-16', enddate: null, },
+        { title: 'Medical Laboratory Technician', company: 'Precision HealthTech', startdate: '2022-03-23', enddate: '2023-01-16', },
+        { title: 'Pharmacist', company: 'BioTech Medical', startdate: '2022-03-23', enddate: '2023-01-01', },
+        { title: 'Physical Therapist', company: 'LifeCure Technologies', startdate: '2020-08-11', enddate: '2021-06-26', }
+    ],
+    education: [
+        { title: 'Doctor of Osteopathic Medicine', company: 'VitalMed Group', startdate: '2023-01-16', enddate: null, },
+        { title: 'Doctor of Dental Medicine (D.M.D.)', company: 'Precision HealthTech', startdate: '2022-03-23', enddate: '2023-01-16', },
+        { title: 'Doctor of Pharmacy (Pharm.D.)', company: 'BioTech Medical', startdate: '2022-03-23', enddate: '2023-01-01', },
+        // { title: 'Doctor of Psychology (Psy.D.)', company: 'LifeCure Technologies', startdate: '2020-08-11', enddate: '2021-06-26', }
+    ],
+    skills: [
+        { id: 1, title: 'Cold Calling', experience: true },
+        { id: 2, title: 'Communication', experience: true },
+        { id: 3, title: 'Technician', experience: true },
+        { id: 4, title: 'Laboratory', experience: true },
+    ],
+    languages: [
+        { id: 1, title: 'English', experience: true },
+        { id: 2, title: 'French', experience: true },
+    ],
     otp: "524566",
     otp_expires_at: null,
     blocked_at: null,

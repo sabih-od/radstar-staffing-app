@@ -25,20 +25,7 @@ import BlockedUsersListModal from '../../../components/modal/BlockedUsersListMod
 import { convertToK } from '../../../helpers/services';
 import SectionTitle from '../../../components/SectionTitle';
 import moment from 'moment';
-
-
-const experience = [
-  { title: 'Physician', company: 'VitalMed Group', startdate: '2023-01-16', enddate: null, },
-  { title: 'Medical Laboratory Technician', company: 'Precision HealthTech', startdate: '2022-03-23', enddate: '2023-01-16', },
-  { title: 'Pharmacist', company: 'BioTech Medical', startdate: '2022-03-23', enddate: '2023-01-01', },
-  { title: 'Physical Therapist', company: 'LifeCure Technologies', startdate: '2020-08-11', enddate: '2021-06-26', }
-]
-const education = [
-  { title: 'Doctor of Osteopathic Medicine', company: 'VitalMed Group', startdate: '2023-01-16', enddate: null, },
-  { title: 'Doctor of Dental Medicine (D.M.D.)', company: 'Precision HealthTech', startdate: '2022-03-23', enddate: '2023-01-16', },
-  { title: 'Doctor of Pharmacy (Pharm.D.)', company: 'BioTech Medical', startdate: '2022-03-23', enddate: '2023-01-01', },
-  // { title: 'Doctor of Psychology (Psy.D.)', company: 'LifeCure Technologies', startdate: '2020-08-11', enddate: '2021-06-26', }
-]
+import ExperienceItem from '../../../components/ExperienceItem';
 
 const Profile = props => {
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
@@ -107,24 +94,7 @@ const Profile = props => {
 
   const [showBlockedUsers, setShowBlockedUsers] = useState(false)
 
-  const ExperienceItem = ({ item, education }) => {
-    return (
-      <View style={{ marginBottom: 13, }}>
-        <View style={{ flexDirection: 'row', marginBottom: 4, }}>
-          <Image defaultSource={require('./../../../../assets/images/no-image.png')} style={{ width: 53, height: 53, borderRadius: 10, marginRight: 10 }} />
-          <View>
-            <Text style={{ fontFamily: fonts.latoBold, fontSize: (fontSize + 2), color: colors.black }}>{item.title}</Text>
-            <Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize, color: colors.primary, marginBottom: 2 }}>{item.company}</Text>
-            {education ?
-              <Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize - 2, color: colors.grey }}>{moment(item?.startdate).format('DD, MMM YYYY')} - {item.enddate ? moment(item?.enddate).format('DD, MMM YYYY') : 'Applied'}</Text>
-              :
-              <Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize - 2, color: colors.grey }}>From {moment(item?.startdate).format('DD, MMM YYYY')} - {item.enddate ? moment(item?.enddate).format('DD, MMM YYYY') : 'Currenctly Working'}</Text>
-            }
-          </View>
-        </View>
-      </View>
-    )
-  }
+
 
   const InfoItem = ({ heading, value }) => {
     return (
@@ -242,14 +212,14 @@ const Profile = props => {
 
               <SectionTitle title={"Experience"} />
               <View style={{ height: 8 }} />
-              {experience && experience.map((item, index) => {
+              {user?.experience && user?.experience.map((item, index) => {
                 return <ExperienceItem key={index} item={item} />
               })}
 
               <View style={{ backgroundColor: colors.white, padding: 15, marginHorizontal: -15, marginBottom: 15 }}>
                 <SectionTitle title={"Education"} />
                 <View style={{ height: 8 }} />
-                {education && education.map((item, index) => {
+                {user?.education && user?.education.map((item, index) => {
                   return <ExperienceItem key={index} item={item} education={true} />
                 })}
               </View>

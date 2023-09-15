@@ -16,11 +16,11 @@ const globalstyle = StyleSheet.create({
 
   authbuttontext: { textTransform: 'uppercase', fontSize: 18, fontFamily: fonts.latoBold, textAlign: 'center', color: colors.white },
   inputbox: { backgroundColor: colors.white, marginBottom: 5, borderRadius: 14, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 20, marginTop: 5 },
-  inputfield: { paddingHorizontal: 15, paddingVertical: IOS ? 20 : 13, fontFamily: fonts.latoRegular, width: '100%', color: colors.black, fontSize: isIPad ? 17 : 14 },
+  inputfield: { paddingHorizontal: 15, paddingVertical: IOS ? 15 : 13, fontFamily: fonts.latoRegular, width: '100%', color: colors.black, fontSize: isIPad ? 17 : fontSize },
   inputlabel: { fontFamily: fonts.latoRegular, fontSize: 14, marginBottom: 5, color: colors.grey },
   alreadysignin: { flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20, },
   errorField: { color: colors.red, fontFamily: fonts.latoRegular, fontSize: 12, marginTop: 2, marginLeft: 15 },
-  alreadyaccount: { fontFamily: fonts.latoRegular, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', color: fontcolor, fontSize: isIPad ? 18 : 14 },
+  alreadyaccount: { fontFamily: fonts.latoRegular, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', color: fontcolor, fontSize: isIPad ? 18 : fontSize },
   actionauthtext: { color: colors.primary, fontFamily: fonts.latoBold, fontSize: isIPad ? 18 : 14 },
   // authlefticon: { color: colors.deepblue },
   showhideicontouch: { padding: 10, zIndex: 1, position: 'absolute', right: 10, },

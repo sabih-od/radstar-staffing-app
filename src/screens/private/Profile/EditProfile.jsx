@@ -25,7 +25,7 @@ import CameraModal from '../../../components/modal/CameraModal';
 
 import { useForm } from 'react-hook-form';
 import globalstyle from '../../../theme/style';
-import { colors, fonts, isIPad } from '../../../theme';
+import { colors, fontSize, fonts, isIPad, width } from '../../../theme';
 import { useRef } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -42,7 +42,19 @@ import DateTimeModal from './../../../components/DateTimeModal';
 import SelectBottomSheet from '../../../components/SelectBottomSheet';
 import countries from '../../../data/countries';
 import SelectModal from '../../../components/modal/SelectModal';
-import { careerlevellist, exprience_level, functionalarealist, genderlist, industrylist } from '../../../data/selectoptions';
+import SectionTitle from '../../../components/SectionTitle';
+import { careerlevellist, exprience_level, functionalarealist, genderlist, industrylist, nationalitylist } from '../../../data/selectoptions';
+import ExperienceModal from '../../../components/modal/ExperienceModal';
+import AddExperience from '../../../components/AddExperience';
+import ExperienceItem from '../../../components/ExperienceItem';
+
+
+const resumes = [
+  { id: 1, title: 'My Resume', default: true },
+  { id: 2, title: 'Abcd Resume', default: true },
+  { id: 3, title: 'Rasdy Resume', default: true },
+  { id: 4, title: 'Uahsn Resume', default: true },
+]
 
 const EditProfile = props => {
   const [showModal, setShowModal] = useState(false);
@@ -279,7 +291,7 @@ const EditProfile = props => {
   const [functional_area, setFunctionalArea] = useState(user?.functional_area ? user?.functional_area : null)
   const [experience, setExperience] = useState(user?.experience ? user?.experience : null)
   // const [ownership, setOwenership] = useState(user?.ownership ? user?.ownership : null)
-  const [nationality, setNationality] = useState(user?.ownership ? user?.ownership : null)
+  const [nationality, setNationality] = useState(user?.nationality ? user?.nationality : null)
   const [country, setCountry] = useState(user?.country ? user?.country : null)
   const [state, setState] = useState(null)
   const [city, setCity] = useState(null);
@@ -324,7 +336,33 @@ const EditProfile = props => {
     setCareerLevel(item)
   }
 
+  const TableRow = ({ item, showFile, showView }) => {
+    return (<View style={{ flexDirection: 'row', backgroundColor: item?.id % 2 == 0 ? '#fff' : '#f1f1f1' }}>
+      <View style={{ width: '50%', justifyContent: 'center', alignItems: 'flex-start', paddingLeft: 15, paddingRight: 5, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }}>
+        {showFile && <Icon name="file" style={{ fontSize: fontSize + 1, marginRight: 8 }} />}
+        <Text style={{ fontFamily: fonts.latoBold, fontSize: fontSize, color: colors.black }}>{item?.title}</Text>
+      </View>
+      {/* <View style={{ width: '50%',   justifyContent: 'center', alignItems: 'flex-start', paddingLeft: 15, paddingRight: 5 }}><Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize, color: colors.grey }}>{item?.default ? 'Default' : ''}</Text></View> */}
+      <View style={{ width: '50%', flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'flex-start', paddingLeft: 15, paddingRight: 5 }}>
+        {showView && <TouchableOpacity style={{ width: 35, paddingVertical: 15, alignItems: 'center' }}>
+          <Icon name="eye" style={{ fontSize: fontSize, color: colors.black }} />
+        </TouchableOpacity>}
+        <TouchableOpacity style={{ width: 35, paddingVertical: 15, alignItems: 'center' }}>
+          <Icon name="edit-2" style={{ fontSize: fontSize, color: '#005393' }} />
+        </TouchableOpacity>
+        <TouchableOpacity style={{ width: 35, paddingVertical: 15, alignItems: 'center' }}>
+          <Icon name="trash" style={{ fontSize: fontSize, color: '#f008' }} />
+        </TouchableOpacity>
+      </View>
+    </View>)
+  }
 
+  const [showExperience, setShowExperience] = useState(false);
+  const [showEducation, setShowEducation] = useState(false);
+
+  const _handleExperienceSubmit = (data) => {
+
+  }
 
   return (
     <>
@@ -589,7 +627,7 @@ const EditProfile = props => {
                     <TextInput style={{ display: 'none' }} {...register('city', { value: '', required: 'City is required', })} />
                     {errors.city && <Text style={globalstyle.errorField}>{errors.city.message}</Text>}
 
-                    <SelectModal placeholder="Select Nationality" selected={nationality} label="Nationality" list={[]} onSelect={_handleNationality} showLabel={true} />
+                    <SelectModal placeholder="Select Nationality" selected={nationality} label="Nationality" list={nationalitylist} onSelect={_handleNationality} showLabel={true} />
                     <TextInput style={{ display: 'none' }} {...register('nationality', { value: '', required: 'Nationality is required', })} />
                     {errors.nationality && <Text style={globalstyle.errorField}>{errors.nationality.message}</Text>}
 
@@ -767,8 +805,10 @@ const EditProfile = props => {
                       <Text style={globalstyle.authSubmitButtonText}>Update Profile</Text>
                     </TouchableOpacity>
 
-                    <Text style={[globalstyle.inputlabel, { marginTop: 10 }]}>Summary</Text>
-                    <View style={[globalstyle.inputbox, { paddingHorizontal: 0 }, { alignItems: 'flex-start', paddingTop: 15 }]}>
+                    <View style={{ height: 20 }} />
+                    {/* <Text style={[globalstyle.inputlabel, { marginTop: 10 }]}>Summary</Text> */}
+                    <SectionTitle title={"Summary"} />
+                    <View style={[globalstyle.inputbox, { paddingHorizontal: 0, }, { alignItems: 'flex-start', paddingTop: 15 }]}>
                       <TextInput
                         style={[globalstyle.inputfield, { height: 130 }]}
                         multiline={true}
@@ -787,11 +827,121 @@ const EditProfile = props => {
                     </View>
                     {errors.summary && (<Text style={globalstyle.errorField}> {errors.summary.message} </Text>)}
 
+                    <View style={{ height: 15 }} />
+                    <View style={{ paddingVertical: 20, paddingHorizontal: 15, backgroundColor: '#fff', marginHorizontal: -15 }}>
+                      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <SectionTitle title={"Curriculum Vitae"} />
+                        <TouchableOpacity style={{ width: 30, height: 30, borderRadius: 10, backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                          <Icon name="plus" style={{ color: colors.white }} />
+                          {/* <Text style={{ color: colors.white, fontFamily: fonts.latoRegular, fontSize: fontSize }}>Upload</Text> */}
+                        </TouchableOpacity>
+                      </View>
+                      <View>
+                        {/* <View style={{ flexDirection: 'row' }}>
+                        <View style={{ width: '50%', paddingVertical: 12, backgroundColor: '#333', justifyContent: 'center', alignItems: 'flex-start', paddingHorizontal: 12 }}><Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize, color: colors.white }}>Title</Text></View>
+                        <View style={{ width: '50%', paddingVertical: 12, backgroundColor: '#333', justifyContent: 'center', alignItems: 'flex-start', paddingHorizontal: 12 }}><Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize, color: colors.white }}>Default</Text></View>
+                        <View style={{ width: '50%', paddingVertical: 12, backgroundColor: '#333', justifyContent: 'center', alignItems: 'flex-start', paddingHorizontal: 12 }}><Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize, color: colors.white }}>Action</Text></View>
+                      </View> */}
+                        <View style={{ marginHorizontal: -15 }}>
+                          {resumes && resumes.map((item, index) => {
+                            return <TableRow keys={index} item={item} showFile={true} showView={true} />
+                          })}
+                        </View>
+                      </View>
+                    </View>
+
+                    <View style={{ height: 30 }} />
+                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
+                      <View style={{ width: width - 70 }}>
+                        <SectionTitle title={"Documents"} />
+                        <Text style={{ fontFamily: fonts.latoRegular, color: colors.grey, marginTop: -7, marginBottom: 10, fontSize: fontSize - 1 }}>All documents must be uploaded for job application submission eligibility.</Text>
+                      </View>
+                      <TouchableOpacity style={{ width: 30, height: 30, borderRadius: 10, backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                        <Icon name="plus" style={{ color: colors.white }} />
+                        {/* <Text style={{ color: colors.white, fontFamily: fonts.latoRegular, fontSize: fontSize }}>Upload</Text> */}
+                      </TouchableOpacity>
+                    </View>
+
+
+
+
+                    <View style={{ height: 1, backgroundColor: '#ddd', marginTop: 10, marginBottom: 15 }} />
+                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
+                      <View style={{ width: width - 70 }}>
+                        <SectionTitle title={"Experience"} />
+                        <Text style={{ fontFamily: fonts.latoRegular, color: colors.grey, marginTop: -7, marginBottom: 10, fontSize: fontSize - 1 }}>Add experience according to your job.</Text>
+                      </View>
+                      <TouchableOpacity
+                        activeOpacity={0.9}
+                        onPress={() => setShowExperience(prev => !prev)}
+                        style={{ width: 30, height: 30, borderRadius: 10, marginTop: 0, backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                        <Icon name={showExperience ? "minus" : "plus"} style={{ color: colors.white }} />
+                      </TouchableOpacity>
+                    </View>
+                    {showExperience && <AddExperience />}
+                    {user?.experience && user?.experience.map((item, index) => {
+                      return <ExperienceItem key={index} item={item} showTrash={true} />
+                    })}
+
+                    <View style={{ height: 1, backgroundColor: '#ddd', marginTop: 10, marginBottom: 15 }} />
+                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
+                      <View style={{ width: width - 70 }}>
+                        <SectionTitle title={"Education"} />
+                        <Text style={{ fontFamily: fonts.latoRegular, color: colors.grey, marginTop: -7, marginBottom: 10, fontSize: fontSize - 1 }}>Add experience according to your job.</Text>
+                      </View>
+                      <TouchableOpacity
+                        activeOpacity={0.9}
+                        onPress={() => setShowEducation(prev => !prev)}
+                        style={{ width: 30, height: 30, borderRadius: 10, marginTop: 0, backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                        <Icon name={showEducation ? "minus" : "plus"} style={{ color: colors.white }} />
+                      </TouchableOpacity>
+                    </View>
+
+
+                    {showEducation && <AddExperience />}
+                    {user?.education && user?.education.map((item, index) => {
+                      return <ExperienceItem key={index} item={item} education={true} showTrash={true} />
+                    })}
+
+                    <View style={{ height: 1, backgroundColor: '#ddd', marginTop: 10, marginBottom: 25 }} />
+                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
+                      <View style={{ width: width - 70 }}>
+                        <SectionTitle title={"Skills"} />
+                        <Text style={{ fontFamily: fonts.latoRegular, color: colors.grey, marginTop: -7, marginBottom: 10, fontSize: fontSize - 1 }}>All skills must be uploaded for job application submission eligibility.</Text>
+                      </View>
+                      <TouchableOpacity style={{ width: 30, height: 30, borderRadius: 10, backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                        <Icon name="plus" style={{ color: colors.white }} />
+                        {/* <Text style={{ color: colors.white, fontFamily: fonts.latoRegular, fontSize: fontSize }}>Upload</Text> */}
+                      </TouchableOpacity>
+                    </View>
+                    <View style={{ marginHorizontal: -15 }}>
+                      {user?.skills && user?.skills.map((item, index) => {
+                        return <TableRow keys={index} item={item} />
+                      })}
+                    </View>
+
+                    <View style={{ height: 1, backgroundColor: '#ddd', marginTop: 25, marginBottom: 25 }} />
+                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
+                      <View style={{ width: width - 70 }}>
+                        <SectionTitle title={"Languages"} />
+                        <Text style={{ fontFamily: fonts.latoRegular, color: colors.grey, marginTop: -7, marginBottom: 10, fontSize: fontSize - 1 }}>All skills must be uploaded for job application submission eligibility.</Text>
+                      </View>
+                      <TouchableOpacity style={{ width: 30, height: 30, borderRadius: 10, backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                        <Icon name="plus" style={{ color: colors.white }} />
+                        {/* <Text style={{ color: colors.white, fontFamily: fonts.latoRegular, fontSize: fontSize }}>Upload</Text> */}
+                      </TouchableOpacity>
+                    </View>
+                    <View style={{ marginHorizontal: -15 }}>
+                      {user?.languages && user?.languages.map((item, index) => {
+                        return <TableRow keys={index} item={item} />
+                      })}
+                    </View>
+
                   </View>
                 </TouchableWithoutFeedback>
               </KeyboardAvoidingView>
             </ScrollView>
-            <SelectBottomSheet list={listtype} handleSelect={_handleSelect} setChildRef={setChildRef} handleSheetChanges={handleSheetChanges} selecteditem={selecteditem} />
+            {/* <SelectBottomSheet list={listtype} handleSelect={_handleSelect} setChildRef={setChildRef} handleSheetChanges={handleSheetChanges} selecteditem={selecteditem} /> */}
             {/* {isSheetOpen && <BottomSheet
               ref={bottomSheetRef}
               index={1}
@@ -821,7 +971,7 @@ const EditProfile = props => {
           </View>
 
         </SafeAreaView >
-      </BottomSheetModalProvider>
+      </BottomSheetModalProvider >
     </>
   );
 };

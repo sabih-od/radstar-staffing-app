@@ -8,10 +8,14 @@ const SelectModal = (props) => {
 
     // let [visibility, setVisiblity] = useState(visible ? visible : false)
     useEffect(() => {
+        setfilteredList(props.list)
+    }, [props.list])
+
+    useEffect(() => {
         // setVisiblity(visible)
+        if (props.label == 'Job Experience') console.log('modal list => ', props.list)
         if (props.selected) {
             const filteritem = props.list.filter((item => item.id == props.selected))
-            console.log('filteritem => ', filteritem)
             filteritem.length > 0 && setItem(filteritem[0]);
         }
         return () => {
@@ -20,8 +24,7 @@ const SelectModal = (props) => {
 
     const [selectedItem, setItem] = useState(null);
     const [isVisible, setVisible] = useState(false);
-    const [filteredList, setfilteredList] = useState(props.list);
-
+    const [filteredList, setfilteredList] = useState();
 
     const _handleSearch = (text) => {
         if (text && text != '') {
@@ -50,7 +53,7 @@ const SelectModal = (props) => {
                     <TouchableOpacity onPress={() => {
                         setVisible(false)
                     }} activeOpacity={1} style={{ ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(0, 0, 0, 0.7)' }}></TouchableOpacity>
-                    <View style={{ backgroundColor: '#fff', borderRadius: 7, overflow: 'hidden', width: isIPad ? '70%' : '90%', height: height / 1.3 }}>
+                    <View style={{ backgroundColor: '#fff', borderRadius: 7, overflow: 'hidden', maxWidth: isIPad ? '70%' : '90%', maxHeight: height / 1.3 }}>
                         <Text style={[globalstyle.modaltitle, { marginBottom: 10 }]}>{props.placeholder}</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#f1f1f1', marginHorizontal: 15, borderRadius: 10, marginBottom: 13 }}>
                             <View style={{
@@ -64,20 +67,23 @@ const SelectModal = (props) => {
                             />
                         </View>
                         <ScrollView style={{}}>
-                            {filteredList && filteredList.map((item, index) => (
-                                <TouchableOpacity
-                                    key={index}
-                                    onPress={() => {
-                                        setVisible(false);
-                                        setItem(item)
-                                        props.onSelect(item);
-                                    }}
-                                    activeOpacity={0.8}
-                                    style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', paddingVertical: 13, paddingHorizontal: 15,  backgroundColor: index % 2 ? '#f7f7f7' : '#fff' }}>
-                                    <Icon name={item.id == props.selected ? "check-circle" : "circle"} style={{ color: item.id == props.selected ? colors.primary : '#999', marginRight: 13, fontSize: 16 }} />
-                                    <Text style={{ fontFamily: fonts.latoRegular }}>{item.title}</Text>
-                                </TouchableOpacity>
-                            ))}
+                            {filteredList && filteredList.map((item, index) => {
+                                if (props.label == 'Job Experience') console.log(item)
+                                return (
+                                    <TouchableOpacity
+                                        key={index}
+                                        onPress={() => {
+                                            setVisible(false);
+                                            setItem(item)
+                                            props.onSelect(item);
+                                        }}
+                                        activeOpacity={0.8}
+                                        style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', paddingVertical: 13, paddingHorizontal: 15, backgroundColor: index % 2 ? '#f7f7f7' : '#fff' }}>
+                                        <Icon name={item.id == props.selected ? "check-circle" : "circle"} style={{ color: item.id == props.selected ? colors.primary : '#999', marginRight: 13, fontSize: 16 }} />
+                                        <Text style={{ fontFamily: fonts.latoRegular }}>{item.title}</Text>
+                                    </TouchableOpacity>
+                                )
+                            })}
                         </ScrollView>
                     </View>
                 </View>
