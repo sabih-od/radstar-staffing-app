@@ -5,6 +5,7 @@ const colorScheme = {
   secondary: '#0281b4',
   black: '#000',
   white: '#fff',
+  red: '#f00',
   grey: 'rgba(0, 0, 0, 0.8)', // '#666',
   placeholdercolor: 'rgba(0, 0, 0, 0.6)',
 };

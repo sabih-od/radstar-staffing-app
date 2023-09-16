@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState, useCallback, useRef } from "react";
-import { SafeAreaView, ScrollView, View, Text, FlatList, ImageBackground, Image, StyleSheet, TouchableOpacity, BackHandler, Alert, RefreshControl, TextInput } from "react-native";
+import { SafeAreaView, ScrollView, View, Text, FlatList, ImageBackground, Image, StyleSheet, TouchableOpacity, BackHandler, Alert, RefreshControl, TextInput, Share } from "react-native";
 import axios from "axios";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -19,8 +19,34 @@ const CompanyProfile = (props) => {
     const [user, setUser] = useState(props.userInfo);
 
     useEffect(() => {
-        
+
     }, [])
+
+
+    const onShare = async () => {
+
+        let shareOptions = {
+            title: `Share ${user?.full_name} Profile`,
+            url: user?.website,
+            message: `${user?.full_name} is a leading company. Established in ${user?.establishedin}, we have been serving [mention your target audience or market] with excellence and innovation`,
+            //subject: 'Subject'
+        };
+
+        try {
+            const result = await Share.share(shareOptions);
+            if (result.action === Share.sharedAction) {
+                if (result.activityType) {
+                    // shared with activity type of result.activityType
+                } else {
+                    // shared
+                }
+            } else if (result.action === Share.dismissedAction) {
+                // dismissed
+            }
+        } catch (error) {
+            alert(error.message);
+        }
+    };
 
     return (
         <SafeAreaView>
@@ -42,18 +68,23 @@ const CompanyProfile = (props) => {
                                     </TouchableOpacity>
                                 </View> */}
                                 <View style={{ flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ width: 30, height: 30, borderRadius: 30, backgroundColor: colors.primary, marginRight: 5, alignItems: 'center', justifyContent: 'center' }}>
+                                    <TouchableOpacity activeOpacity={0.8} style={{ width: 30, height: 30, borderRadius: 30, backgroundColor: colors.primary, marginRight: 5, alignItems: 'center', justifyContent: 'center' }}>
                                         {/* <Icon name="facebook" style={{ color: colors.white, fontSize: fontSize }} /> */}
                                         <EvilIcons name="sc-facebook" style={{ color: colors.white, fontSize: fontSize + 7 }} />
                                     </TouchableOpacity>
-                                    <TouchableOpacity style={{ width: 30, height: 30, borderRadius: 30, backgroundColor: colors.primary, marginRight: 5, alignItems: 'center', justifyContent: 'center' }}>
+                                    <TouchableOpacity activeOpacity={0.8} style={{ width: 30, height: 30, borderRadius: 30, backgroundColor: colors.primary, marginRight: 5, alignItems: 'center', justifyContent: 'center' }}>
                                         <EvilIcons name="sc-twitter" style={{ color: colors.white, fontSize: fontSize + 7 }} />
                                     </TouchableOpacity>
-                                    <TouchableOpacity style={{ width: 30, height: 30, borderRadius: 30, backgroundColor: colors.primary, marginRight: 5, alignItems: 'center', justifyContent: 'center' }}>
+                                    <TouchableOpacity activeOpacity={0.8} style={{ width: 30, height: 30, borderRadius: 30, backgroundColor: colors.primary, marginRight: 5, alignItems: 'center', justifyContent: 'center' }}>
                                         <EvilIcons name="sc-linkedin" style={{ color: colors.white, fontSize: fontSize + 7 }} />
                                     </TouchableOpacity>
-                                    <TouchableOpacity style={{ width: 30, height: 30, borderRadius: 30, backgroundColor: colors.primary, marginRight: 5, alignItems: 'center', justifyContent: 'center' }}>
+                                    {/* <TouchableOpacity activeOpacity={0.8} style={{ width: 30, height: 30, borderRadius: 30, backgroundColor: colors.primary, marginRight: 5, alignItems: 'center', justifyContent: 'center' }}>
                                         <EvilIcons name="sc-pinterest" style={{ color: colors.white, fontSize: fontSize + 7 }} />
+                                    </TouchableOpacity> */}
+                                    <TouchableOpacity activeOpacity={0.8} style={{ width: 30, height: 30, borderRadius: 30, backgroundColor: colors.primary, marginRight: 5, alignItems: 'center', justifyContent: 'center' }}
+                                        onPress={() => onShare()}
+                                    >
+                                        <Icon name="share-2" style={{ color: colors.white, fontSize: fontSize - 1 }} />
                                     </TouchableOpacity>
                                 </View>
                             </View>

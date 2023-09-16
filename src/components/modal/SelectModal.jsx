@@ -13,7 +13,6 @@ const SelectModal = (props) => {
 
     useEffect(() => {
         // setVisiblity(visible)
-        if (props.label == 'Job Experience') console.log('modal list => ', props.list)
         if (props.selected) {
             const filteritem = props.list.filter((item => item.id == props.selected))
             filteritem.length > 0 && setItem(filteritem[0]);
@@ -50,15 +49,11 @@ const SelectModal = (props) => {
                 onRequestClose={() => { setVisible(false); }}
             >
                 <View style={{ ...StyleSheet.absoluteFillObject, zIndex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                    <TouchableOpacity onPress={() => {
-                        setVisible(false)
-                    }} activeOpacity={1} style={{ ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(0, 0, 0, 0.7)' }}></TouchableOpacity>
-                    <View style={{ backgroundColor: '#fff', borderRadius: 7, overflow: 'hidden', maxWidth: isIPad ? '70%' : '90%', maxHeight: height / 1.3 }}>
+                    <TouchableOpacity onPress={() => { setVisible(false) }} activeOpacity={1} style={{ ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(0, 0, 0, 0.7)' }}></TouchableOpacity>
+                    <View style={{ backgroundColor: colors.white, borderRadius: 7, overflow: 'hidden', maxWidth: isIPad ? '70%' : '90%', maxHeight: height / 1.3 }}>
                         <Text style={[globalstyle.modaltitle, { marginBottom: 10 }]}>{props.placeholder}</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#f1f1f1', marginHorizontal: 15, borderRadius: 10, marginBottom: 13 }}>
-                            <View style={{
-                                width: 40, height: 40, alignItems: 'center', justifyContent: 'center'
-                            }}><Icon name="search" style={{ fontSize: fontSize + 2, color: colors.grey }} /></View>
+                            <View style={{ width: 40, height: 40, alignItems: 'center', justifyContent: 'center' }}><Icon name="search" style={{ fontSize: fontSize + 2, color: colors.grey }} /></View>
                             <TextInput
                                 onChangeText={value => _handleSearch(value)}
                                 placeholderTextColor={colors.placeholdercolor}
@@ -66,9 +61,8 @@ const SelectModal = (props) => {
                                 style={{ fontFamily: fonts.latoRegular, paddingVertical: 10, width: '84%' }}
                             />
                         </View>
-                        <ScrollView style={{}}>
+                        <ScrollView contentContainerStyle={{ flexGrow: 1 }} style={{ backgroundColor: '#ddd', }}>
                             {filteredList && filteredList.map((item, index) => {
-                                if (props.label == 'Job Experience') console.log(item)
                                 return (
                                     <TouchableOpacity
                                         key={index}
@@ -78,7 +72,7 @@ const SelectModal = (props) => {
                                             props.onSelect(item);
                                         }}
                                         activeOpacity={0.8}
-                                        style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', paddingVertical: 13, paddingHorizontal: 15, backgroundColor: index % 2 ? '#f7f7f7' : '#fff' }}>
+                                        style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', paddingVertical: 13, paddingHorizontal: 15, backgroundColor: index % 2 ? '#f7f7f7' : colors.white }}>
                                         <Icon name={item.id == props.selected ? "check-circle" : "circle"} style={{ color: item.id == props.selected ? colors.primary : '#999', marginRight: 13, fontSize: 16 }} />
                                         <Text style={{ fontFamily: fonts.latoRegular }}>{item.title}</Text>
                                     </TouchableOpacity>
@@ -89,8 +83,8 @@ const SelectModal = (props) => {
                 </View>
             </Modal>
 
-            <View style={[styles.inputwithlabel, { marginBottom: 12 }]}>
-                <Text style={[globalstyle.inputlabel, { marginBottom: 10 }]}>{props.label}</Text>
+            <View style={[styles.inputwithlabel, { marginBottom: 5 }]}>
+                {props.label && <Text style={[globalstyle.inputlabel, { marginBottom: 10 }]}>{props.label}</Text>}
                 <TouchableOpacity
                     activeOpacity={0.8}
                     onPress={() => {

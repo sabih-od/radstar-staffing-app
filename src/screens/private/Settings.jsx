@@ -19,9 +19,10 @@ const Settings = props => {
                 onPress={() => {
 
                     if (props.icon == 'log-out') {
-                        props.navigation.closeDrawer();
-                        // props.EditProfileApiCall(userInfo.id, { fcm_token: '' });
+                        // props.navigation.closeDrawer();
+                        props.navigation.navigate('Dashboard');
                         props.LogOut();
+
                     } else {
                         props.nav && props.navigation.navigate(props.nav)
                     }

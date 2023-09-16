@@ -45,7 +45,7 @@ const Jobs = (props) => {
                 <View style={{ marginBottom: 20, marginTop: -15 }}>
                     {/* <Text style={{ fontSize: (fontSize + 4), fontFamily: fonts.latoBold, marginBottom: 20 }}>Job Openings</Text> */}
                     {jobslist.map((item, index) => {
-                        console.log('index => ', index)
+                        // console.log('index => ', index)
                         const last = 20 == index + 1 ? true : false;
                         return (<JobItem key={index} item={item} index={index} candidates={true} last={last} />)
                     })}

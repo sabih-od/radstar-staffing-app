@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState, useCallback, useRef } from "react";
-import { SafeAreaView, ScrollView, View, Text, FlatList, ImageBackground, Image, StyleSheet, TouchableOpacity, BackHandler, Alert, RefreshControl, TextInput } from "react-native";
+import { SafeAreaView, ScrollView, View, Text, FlatList, ImageBackground, Image, StyleSheet, TouchableOpacity, BackHandler, Alert, RefreshControl, TextInput, Platform } from "react-native";
 import axios from "axios";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -12,6 +12,10 @@ import { useForm } from "react-hook-form";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
 import moment from "moment";
 import DateTimeModal from './../../components/DateTimeModal';
+import InputField from "../../components/InputField";
+import SelectModal from "../../components/modal/SelectModal";
+import { careerlevellist, degreelevellist, exprience_level, functionalarealist, industrylist, jobshiftlist, jobtypelist, salarycurrencylist, salaryperiodlist } from "../../data/selectoptions";
+import countries from "../../data/countries";
 
 const CreateJob = (props) => {
 
@@ -52,299 +56,137 @@ const CreateJob = (props) => {
         setShowDate(false);
     }
 
+    const [country, setCountry] = useState(null);
+    const [state, setState] = useState(null);
+    const [city, setCity] = useState(null);
+    const [careerlevel, setCareerLevel] = useState(null);
+    const [functionalarea, setFunctionalArea] = useState(null);
+    const [industry, setIndustry] = useState(null);
+    const [jobtype, setJobType] = useState(null);
+    const [jobshift, setJobShift] = useState(null);
+    const [noofpositions, setNoOfPositions] = useState(null);
+    const [degreelevel, setDegreeLevel] = useState(null);
+    const [jobexperience, setJobExperience] = useState(null);
+    const [salarycurrency, setSalaryCurrency] = useState(null);
+    const [salaryperiod, setSalaryPeriod] = useState(null);
+
+    const _handleCountry = (item) => setCountry(item);
+    const _handleState = (item) => setState(item);
+    const _handleCity = (item) => setCity(item);
+    const _handleIndustry = (item) => setIndustry(item);
+    const _handleFunctionalArea = (item) => setFunctionalArea(item);
+    const _handleExperience = (item) => setExperience(item);
+    const _handleCareerLevel = (item) => setCareerLevel(item);
+    const _handleSalaryPeriod = (item) => setSalaryPeriod(item);
+
+
+    const _handleNoOfPositions = (item) => setNoOfPositions(item);
+    const _handleSalaryCurrency = (item) => setSalaryCurrency(item);
+    const _handleJobExperience = (item) => setJobExperience(item);
+    const _handleDegreeLevel = (item) => setDegreeLevel(item);
+    const _handleJobShift = (item) => setJobShift(item);
+    const _handleJobType = (item) => setJobType(item);
+
+
     return (
         <SafeAreaView>
             <ScrollView style={{ padding: 15 }} showsVerticalScrollIndicator={false}>
                 <View>
                     {/* <Text style={{ fontSize: 18, fontFamily: fonts.latoBold, marginBottom: 20 }}>Account Information</Text> */}
 
-                    <View style={styles.inputwithlabel}>
-                        <Text style={globalstyle.inputlabel}>Title</Text>
-                        <View style={[globalstyle.inputbox, { paddingHorizontal: 0 }]}>
-                            {/* <Icon color={colors.primary} name={'mail'} size={18} /> */}
-                            <TextInput
-                                style={globalstyle.inputfield}
-                                editable={false}
-                                placeholder="Job Title"
-                                // value=''
-                                {...register('job_title', {
-                                    value: '',
-                                    required: 'Job Title is required',
-                                    pattern: {
-                                        value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-                                        message: "Please provide valid job_title"
-                                    },
-                                })}
-                                defaultValue={''}
-                                placeholderTextColor={colors.placeholdercolor}
-                                autoCapitalize='none'
-                                onChangeText={(value) => setValue('job_title', value)}
-                                ref={input01}
-                                returnKeyType="next"
-                                onSubmitEditing={() => input02.current.focus()}
-                            />
-                        </View>
-                        {errors.job_title && <Text style={globalstyle.errorField}>{errors.job_title.message}</Text>}
-                    </View>
+                    <InputField
+                        register={register}
+                        label={'Title'}
+                        placeholder={'Enter Job Title...'}
+                        name={'job_title'}
+                        onChangeText={(value) => setValue('job_title', value)}
+                        required={true}
+                        pattern='/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i'
+                        errors={errors}
+                    />
+
+                    <InputField
+                        register={register}
+                        label={'Description'}
+                        placeholder={'Enter Job Description...'}
+                        name={'job_description'}
+                        onChangeText={(value) => setValue('job_description', value)}
+                        required={true}
+                        pattern='/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i'
+                        errors={errors}
+                        multiline={true}
+                    />
+                    <InputField
+                        register={register}
+                        label={'Benefits'}
+                        placeholder={'Enter Job Benefits...'}
+                        name={'job_benefits'}
+                        onChangeText={(value) => setValue('job_benefits', value)}
+                        required={true}
+                        pattern='/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i'
+                        errors={errors}
+                        multiline={true}
+                    />
+                    <InputField
+                        register={register}
+                        label={'Skills'}
+                        placeholder={'Enter Job Skills...'}
+                        name={'job_skills'}
+                        onChangeText={(value) => setValue('job_skills', value)}
+                        required={true}
+                        pattern='/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i'
+                        errors={errors}
+                    />
 
                     <View style={styles.inputwithlabel}>
-                        <Text style={globalstyle.inputlabel}>Description</Text>
-                        <View style={[globalstyle.inputbox, { paddingHorizontal: 0, paddingTop: 15, height: 140, alignItems: 'flex-start' }]}>
-                            {/* <Icon color={colors.primary} name={'mail'} size={18} /> */}
-                            <TextInput
-                                style={globalstyle.inputfield}
-                                multiline={true}
-                                placeholder="Job Description"
-                                // value=''
-                                {...register('description', {
-                                    value: '',
-                                    // required: 'Email Address is required',
-                                    // pattern: {
-                                    //     value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-                                    //     message: "Please provide valid description"
-                                    // },
-                                })}
-                                defaultValue={''}
-                                placeholderTextColor={colors.placeholdercolor}
-                                autoCapitalize='none'
-                                onChangeText={(value) => setValue('description', value)}
-                                ref={input01}
-                                returnKeyType="next"
-                                onSubmitEditing={() => input02.current.focus()}
-                            />
-                        </View>
-                        {errors.description && <Text style={globalstyle.errorField}>{errors.description.message}</Text>}
-                    </View>
+                        {/* <Text style={globalstyle.inputlabel}>Address</Text> */}
+                        <SelectModal placeholder="Select Country" selected={country} label="Country" list={countries} onSelect={_handleCountry} showLabel={true} />
+                        <TextInput style={{ display: 'none' }} {...register('country', { value: '', required: 'Country is required', })} />
+                        {errors.country && <Text style={globalstyle.errorField}>{errors.country.message}</Text>}
 
-                    <View style={styles.inputwithlabel}>
-                        <Text style={globalstyle.inputlabel}>Benefits</Text>
-                        <View style={[globalstyle.inputbox, { paddingHorizontal: 0, paddingTop: 15, height: 140, alignItems: 'flex-start' }]}>
-                            {/* <Icon color={colors.primary} name={'mail'} size={18} /> */}
-                            <TextInput
-                                style={globalstyle.inputfield}
-                                multiline={true}
-                                placeholder="Benefits"
-                                // value=''
-                                {...register('benefits', {
-                                    value: '',
-                                    // required: 'Email Address is required',
-                                    // pattern: {
-                                    //     value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-                                    //     message: "Please provide valid benefits"
-                                    // },
-                                })}
-                                defaultValue={''}
-                                placeholderTextColor={colors.placeholdercolor}
-                                autoCapitalize='none'
-                                onChangeText={(value) => setValue('benefits', value)}
-                                ref={input01}
-                                returnKeyType="next"
-                                onSubmitEditing={() => input02.current.focus()}
-                            />
-                        </View>
-                        {errors.benefits && <Text style={globalstyle.errorField}>{errors.benefits.message}</Text>}
-                    </View>
+                        <SelectModal placeholder="Select State" selected={state} label="State" list={[]} onSelect={_handleState} showLabel={true} />
+                        <TextInput style={{ display: 'none' }} {...register('state', { value: '', required: 'State is required', })} />
+                        {errors.state && <Text style={globalstyle.errorField}>{errors.state.message}</Text>}
 
-                    <View style={styles.inputwithlabel}>
-                        <Text style={globalstyle.inputlabel}>Skills</Text>
-                        <View style={[globalstyle.inputbox, { paddingHorizontal: 0 }]}>
-                            {/* <Icon color={colors.primary} name={'mail'} size={18} /> */}
-                            <TextInput
-                                style={globalstyle.inputfield}
-                                placeholder="Select Required Skills"
-                                // value=''
-                                {...register('skills', {
-                                    value: '',
-                                    // required: 'Email Address is required',
-                                    // pattern: {
-                                    //     value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-                                    //     message: "Please provide valid email"
-                                    // },
-                                })}
-                                defaultValue={''}
-                                placeholderTextColor={colors.placeholdercolor}
-                                autoCapitalize='none'
-                                onChangeText={(value) => setValue('skills', value)}
-                                ref={input01}
-                                returnKeyType="next"
-                                onSubmitEditing={() => input02.current.focus()}
-                            />
-                        </View>
-                        {errors.skills && <Text style={globalstyle.errorField}>{errors.skills.message}</Text>}
-                    </View>
-
-                    <View style={styles.inputwithlabel}>
-                        <Text style={globalstyle.inputlabel}>Address</Text>
-                        <View style={[globalstyle.inputbox, { paddingHorizontal: 0 }]}>
-                            {/* <Icon color={colors.primary} name={'mail'} size={18} /> */}
-                            <TextInput
-                                style={globalstyle.inputfield}
-                                placeholder="Select Country"
-                                // value=''
-                                {...register('industry', {
-                                    value: '',
-                                    // required: 'Email Address is required',
-                                    // pattern: {
-                                    //     value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-                                    //     message: "Please provide valid email"
-                                    // },
-                                })}
-                                defaultValue={''}
-                                placeholderTextColor={colors.placeholdercolor}
-                                autoCapitalize='none'
-                                onChangeText={(value) => setValue('industry', value)}
-                                ref={input01}
-                                returnKeyType="next"
-                                onSubmitEditing={() => input02.current.focus()}
-                            />
-                        </View>
-                        <View style={[globalstyle.inputbox, { paddingHorizontal: 0 }]}>
-                            {/* <Icon color={colors.primary} name={'mail'} size={18} /> */}
-                            <TextInput
-                                style={globalstyle.inputfield}
-                                placeholder="Select State"
-                                // value=''
-                                {...register('state', {
-                                    value: '',
-                                    // required: 'Email Address is required',
-                                    // pattern: {
-                                    //     value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-                                    //     message: "Please provide valid email"
-                                    // },
-                                })}
-                                defaultValue={''}
-                                placeholderTextColor={colors.placeholdercolor}
-                                autoCapitalize='none'
-                                onChangeText={(value) => setValue('state', value)}
-                                ref={input01}
-                                returnKeyType="next"
-                                onSubmitEditing={() => input02.current.focus()}
-                            />
-                        </View>
-                        <View style={[globalstyle.inputbox, { paddingHorizontal: 0 }]}>
-                            {/* <Icon color={colors.primary} name={'mail'} size={18} /> */}
-                            <TextInput
-                                style={globalstyle.inputfield}
-                                placeholder="Select City"
-                                // value=''
-                                {...register('city', {
-                                    value: '',
-                                    // required: 'Email Address is required',
-                                    // pattern: {
-                                    //     value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-                                    //     message: "Please provide valid email"
-                                    // },
-                                })}
-                                defaultValue={''}
-                                placeholderTextColor={colors.placeholdercolor}
-                                autoCapitalize='none'
-                                onChangeText={(value) => setValue('city', value)}
-                                ref={input01}
-                                returnKeyType="next"
-                                onSubmitEditing={() => input02.current.focus()}
-                            />
-                        </View>
+                        <SelectModal placeholder="Select City" selected={city} label="City" list={[]} onSelect={_handleCity} showLabel={true} />
+                        <TextInput style={{ display: 'none' }} {...register('city', { value: '', required: 'City is required', })} />
                         {errors.city && <Text style={globalstyle.errorField}>{errors.city.message}</Text>}
                     </View>
 
-                    <View style={styles.inputwithlabel}>
-                        <Text style={globalstyle.inputlabel}>Salary</Text>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <View style={[globalstyle.inputbox, { paddingHorizontal: 0 }, { width: '48.5%' }]}>
-                                {/* <Icon color={colors.primary} name={'mail'} size={18} /> */}
-                                <TextInput
-                                    style={globalstyle.inputfield}
-                                    placeholder="Salary From"
-                                    // value=''
-                                    {...register('salary_from', {
-                                        value: '',
-                                        // required: 'Email Address is required',
-                                        // pattern: {
-                                        //     value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-                                        //     message: "Please provide valid email"
-                                        // },
-                                    })}
-                                    defaultValue={''}
-                                    placeholderTextColor={colors.placeholdercolor}
-                                    autoCapitalize='none'
-                                    onChangeText={(value) => setValue('salary_from', value)}
-                                    ref={input01}
-                                    returnKeyType="next"
-                                    onSubmitEditing={() => input02.current.focus()}
-                                />
-                            </View>
-                            <View style={[globalstyle.inputbox, { paddingHorizontal: 0 }, { width: '48.5%' }]}>
-                                {/* <Icon color={colors.primary} name={'mail'} size={18} /> */}
-                                <TextInput
-                                    style={globalstyle.inputfield}
-                                    placeholder="Salary To"
-                                    // value=''
-                                    {...register('salary_to', {
-                                        value: '',
-                                        // required: 'Email Address is required',
-                                        // pattern: {
-                                        //     value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-                                        //     message: "Please provide valid email"
-                                        // },
-                                    })}
-                                    defaultValue={''}
-                                    placeholderTextColor={colors.placeholdercolor}
-                                    autoCapitalize='none'
-                                    onChangeText={(value) => setValue('salary_to', value)}
-                                    ref={input01}
-                                    returnKeyType="next"
-                                    onSubmitEditing={() => input02.current.focus()}
-                                />
-                            </View>
-                        </View>
-                        <View style={[globalstyle.inputbox, { paddingHorizontal: 0 }]}>
-                            {/* <Icon color={colors.primary} name={'mail'} size={18} /> */}
-                            <TextInput
-                                style={globalstyle.inputfield}
-                                placeholder="Select Salary Currency"
-                                // value=''
-                                {...register('salary_currency', {
-                                    value: '',
-                                    // required: 'Email Address is required',
-                                    // pattern: {
-                                    //     value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-                                    //     message: "Please provide valid email"
-                                    // },
-                                })}
-                                defaultValue={''}
-                                placeholderTextColor={colors.placeholdercolor}
-                                autoCapitalize='none'
-                                onChangeText={(value) => setValue('salary_currency', value)}
-                                ref={input01}
-                                returnKeyType="next"
-                                onSubmitEditing={() => input02.current.focus()}
-                            />
-                        </View>
-                        <View style={[globalstyle.inputbox, { paddingHorizontal: 0 }]}>
-                            {/* <Icon color={colors.primary} name={'mail'} size={18} /> */}
-                            <TextInput
-                                style={globalstyle.inputfield}
-                                placeholder="Select Salary Period"
-                                // value=''
-                                {...register('salary_period', {
-                                    value: '',
-                                    // required: 'Email Address is required',
-                                    // pattern: {
-                                    //     value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-                                    //     message: "Please provide valid email"
-                                    // },
-                                })}
-                                defaultValue={''}
-                                placeholderTextColor={colors.placeholdercolor}
-                                autoCapitalize='none'
-                                onChangeText={(value) => setValue('salary_period', value)}
-                                ref={input01}
-                                returnKeyType="next"
-                                onSubmitEditing={() => input02.current.focus()}
-                            />
-                        </View>
-                        {errors.salary_period && <Text style={globalstyle.errorField}>{errors.salary_period.message}</Text>}
+                    <Text style={globalstyle.inputlabel}>Salary</Text>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                        <InputField
+                            register={register}
+                            label={'Salary From'}
+                            placeholder={'Salary From...'}
+                            name={'salary_from'}
+                            onChangeText={(value) => setValue('salary_from', value)}
+                            required={true}
+                            pattern='/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i'
+                            errors={errors}
+                            halffield={true}
+                        />
+                        <InputField
+                            register={register}
+                            label={'Salary To'}
+                            placeholder={'Salary To...'}
+                            name={'salary_to'}
+                            onChangeText={(value) => setValue('salary_to', value)}
+                            required={true}
+                            pattern='/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i'
+                            errors={errors}
+                            halffield={true}
+                        />
                     </View>
+
+                    <SelectModal placeholder="Select Salary Currency" selected={salarycurrency} list={salarycurrencylist} onSelect={_handleSalaryCurrency} showLabel={true} />
+                    <TextInput style={{ display: 'none' }} {...register('salary_currency', { value: '', required: 'Salary currency is required', })} />
+                    {errors.salary_currency && <Text style={globalstyle.errorField}>{errors.salary_currency.message}</Text>}
+
+                    <SelectModal placeholder="Select Salary Period" selected={salaryperiod} list={salaryperiodlist} onSelect={_handleSalaryPeriod} showLabel={true} />
+                    <TextInput style={{ display: 'none' }} {...register('salary_period', { value: '', required: 'Salary period is required', })} />
+                    {errors.salary_period && <Text style={globalstyle.errorField}>{errors.salary_period.message}</Text>}
+
 
 
                     <View style={{ flexDirection: 'row', marginBottom: 20, marginTop: 10 }}>
@@ -360,156 +202,47 @@ const CreateJob = (props) => {
                     </View>
 
                     <View style={styles.inputwithlabel}>
-                        <Text style={globalstyle.inputlabel}>Freelance</Text>
-                        <View style={[globalstyle.inputbox, { paddingHorizontal: 0 }]}>
-                            {/* <Icon color={colors.primary} name={'map-pin'} size={18} /> */}
-                            <TextInput
-                                style={globalstyle.inputfield}
-                                placeholder="Select Career Level"
-                                // value=''
-                                {...register('address', {
-                                    value: '',
-                                    // required: 'Email Address is required',
-                                    // pattern: {
-                                    //     value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-                                    //     message: "Please provide valid email"
-                                    // },
-                                })}
-                                defaultValue={''}
-                                placeholderTextColor={colors.placeholdercolor}
-                                autoCapitalize='none'
-                                onChangeText={(value) => setValue('address', value)}
-                                ref={input01}
-                                returnKeyType="next"
-                                onSubmitEditing={() => input02.current.focus()}
-                            />
-                        </View>
-                        {errors.address && <Text style={globalstyle.errorField}>{errors.address.message}</Text>}
 
-                        <View style={[globalstyle.inputbox, { paddingHorizontal: 0 }]}>
-                            {/* <Icon color={colors.primary} name={'map-pin'} size={18} /> */}
-                            <TextInput
-                                style={globalstyle.inputfield}
-                                placeholder="Select Functional Area"
-                                // value=''
-                                {...register('address', {
-                                    value: '',
-                                    // required: 'Email Address is required',
-                                    // pattern: {
-                                    //     value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-                                    //     message: "Please provide valid email"
-                                    // },
-                                })}
-                                defaultValue={''}
-                                placeholderTextColor={colors.placeholdercolor}
-                                autoCapitalize='none'
-                                onChangeText={(value) => setValue('address', value)}
-                                ref={input01}
-                                returnKeyType="next"
-                                onSubmitEditing={() => input02.current.focus()}
-                            />
-                        </View>
-                        {errors.address && <Text style={globalstyle.errorField}>{errors.address.message}</Text>}
+                        <SelectModal placeholder="Select Career Level" selected={careerlevel} label="Career Level" list={careerlevellist} onSelect={_handleCareerLevel} showLabel={true} />
+                        <TextInput style={{ display: 'none' }} {...register('career_level', { value: '', required: 'Career Level is required', })} />
+                        {errors.career_level && <Text style={globalstyle.errorField}>{errors.career_level.message}</Text>}
 
-                        <View style={[globalstyle.inputbox, { paddingHorizontal: 0 }]}>
-                            {/* <Icon color={colors.primary} name={'map-pin'} size={18} /> */}
-                            <TextInput
-                                style={globalstyle.inputfield}
-                                placeholder="Select Job Type"
-                                // value=''
-                                {...register('address', {
-                                    value: '',
-                                    // required: 'Email Address is required',
-                                    // pattern: {
-                                    //     value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-                                    //     message: "Please provide valid email"
-                                    // },
-                                })}
-                                defaultValue={''}
-                                placeholderTextColor={colors.placeholdercolor}
-                                autoCapitalize='none'
-                                onChangeText={(value) => setValue('address', value)}
-                                ref={input01}
-                                returnKeyType="next"
-                                onSubmitEditing={() => input02.current.focus()}
-                            />
-                        </View>
-                        {errors.address && <Text style={globalstyle.errorField}>{errors.address.message}</Text>}
+                        <SelectModal placeholder="Select Industry" selected={industry} label="Industry" list={industrylist} onSelect={_handleIndustry} showLabel={true} />
+                        <TextInput style={{ display: 'none' }} {...register('industry', { value: '', required: 'Industry is required', })} />
+                        {errors.industry && <Text style={globalstyle.errorField}>{errors.industry.message}</Text>}
 
-                        <View style={[globalstyle.inputbox, { paddingHorizontal: 0 }]}>
-                            {/* <Icon color={colors.primary} name={'map-pin'} size={18} /> */}
-                            <TextInput
-                                style={globalstyle.inputfield}
-                                placeholder="Select Job Shift"
-                                // value=''
-                                {...register('address', {
-                                    value: '',
-                                    // required: 'Email Address is required',
-                                    // pattern: {
-                                    //     value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-                                    //     message: "Please provide valid email"
-                                    // },
-                                })}
-                                defaultValue={''}
-                                placeholderTextColor={colors.placeholdercolor}
-                                autoCapitalize='none'
-                                onChangeText={(value) => setValue('address', value)}
-                                ref={input01}
-                                returnKeyType="next"
-                                onSubmitEditing={() => input02.current.focus()}
-                            />
-                        </View>
-                        {errors.address && <Text style={globalstyle.errorField}>{errors.address.message}</Text>}
+                        <SelectModal placeholder="Select Functional Area" selected={functionalarea} label="Functional Area" list={functionalarealist} onSelect={_handleFunctionalArea} showLabel={true} />
+                        <TextInput style={{ display: 'none' }} {...register('functional_area', { value: '', required: 'Functional Area is required', })} />
+                        {errors.functional_area && <Text style={globalstyle.errorField}>{errors.functional_area.message}</Text>}
 
-                        <View style={[globalstyle.inputbox, { paddingHorizontal: 0 }]}>
-                            {/* <Icon color={colors.primary} name={'map-pin'} size={18} /> */}
-                            <TextInput
-                                style={globalstyle.inputfield}
-                                placeholder="Select Number Of Positions"
-                                // value=''
-                                {...register('address', {
-                                    value: '',
-                                    // required: 'Email Address is required',
-                                    // pattern: {
-                                    //     value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-                                    //     message: "Please provide valid email"
-                                    // },
-                                })}
-                                defaultValue={''}
-                                placeholderTextColor={colors.placeholdercolor}
-                                autoCapitalize='none'
-                                onChangeText={(value) => setValue('address', value)}
-                                ref={input01}
-                                returnKeyType="next"
-                                onSubmitEditing={() => input02.current.focus()}
-                            />
-                        </View>
-                        {errors.address && <Text style={globalstyle.errorField}>{errors.address.message}</Text>}
+                        <SelectModal placeholder="Select Job Type" selected={jobtype} label="Job Type" list={jobtypelist} onSelect={_handleFunctionalArea} showLabel={true} />
+                        <TextInput style={{ display: 'none' }} {...register('jobtype', { value: '', required: 'Functional Area is required', })} />
+                        {errors.jobtype && <Text style={globalstyle.errorField}>{errors.jobtype.message}</Text>}
 
-                        <View style={[globalstyle.inputbox, { paddingHorizontal: 0 }]}>
-                            {/* <Icon color={colors.primary} name={'map-pin'} size={18} /> */}
-                            <TextInput
-                                style={globalstyle.inputfield}
-                                placeholder="No Preference"
-                                // value=''
-                                {...register('address', {
-                                    value: '',
-                                    // required: 'Email Address is required',
-                                    // pattern: {
-                                    //     value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-                                    //     message: "Please provide valid email"
-                                    // },
-                                })}
-                                defaultValue={''}
-                                placeholderTextColor={colors.placeholdercolor}
-                                autoCapitalize='none'
-                                onChangeText={(value) => setValue('address', value)}
-                                ref={input01}
-                                returnKeyType="next"
-                                onSubmitEditing={() => input02.current.focus()}
-                            />
-                        </View>
-                        {errors.address && <Text style={globalstyle.errorField}>{errors.address.message}</Text>}
+                        <SelectModal placeholder="Select Job Shift" selected={jobtype} label="Job Shift" list={jobshiftlist} onSelect={_handleFunctionalArea} showLabel={true} />
+                        <TextInput style={{ display: 'none' }} {...register('jobtype', { value: '', required: 'Job shift is required', })} />
+                        {errors.jobtype && <Text style={globalstyle.errorField}>{errors.jobtype.message}</Text>}
+
+                        <InputField
+                            register={register}
+                            label={'Number of Positions'}
+                            placeholder={'Enter Number of Positions...'}
+                            name={'noofpositions'}
+                            onChangeText={(value) => setValue('noofpositions', value)}
+                            required={true}
+                            pattern='/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i'
+                            errors={errors}
+                        />
+                        <InputField
+                            register={register}
+                            label={'No Preference'}
+                            placeholder={'Enter No Preference...'}
+                            name={'nopreference'}
+                            onChangeText={(value) => setValue('nopreference', value)}
+                            required={true}
+                            pattern='/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i'
+                            errors={errors}
+                        />
 
                         {Platform.OS === 'ios' && <DateTimeModal
                             showDate={showDate}
@@ -531,87 +264,24 @@ const CreateJob = (props) => {
                             />
                         )}
 
+                        <Text style={globalstyle.inputlabel}>{'Expiry Date'}</Text>
                         <TouchableOpacity
                             activeOpacity={0.8}
                             onPress={() => setShowDate(true)}
                             style={[globalstyle.inputbox, { width: '100%', paddingVertical: 0, paddingHorizontal: 0 }]}>
                             <Text style={[globalstyle.inputfield, { color: expriyDate != '' ? colors.black : colors.placeholdercolor }]}>{expriyDate != '' ? expriyDate : 'Job Expiry Date'}</Text>
                         </TouchableOpacity>
+                        <TextInput style={{ display: 'none' }} placeholder="Job Expiry Date" {...register('expiry_date', { required: 'Expiry date is required', })} />
+                        {errors.expiry_date && <Text style={globalstyle.errorField}>{errors.expiry_date.message}</Text>}
 
-                        <View style={[globalstyle.inputbox, { paddingHorizontal: 0, display: 'none' }]}>
-                            {/* <Icon color={colors.primary} name={'map-pin'} size={18} /> */}
-                            <TextInput
-                                style={globalstyle.inputfield}
-                                placeholder="Job Expiry Date"
-                                // value=''
-                                {...register('expiry_date', {
-                                    value: '',
-                                    // required: 'Email Address is required',
-                                    // pattern: {
-                                    //     value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-                                    //     message: "Please provide valid email"
-                                    // },
-                                })}
-                                defaultValue={''}
-                                placeholderTextColor={colors.placeholdercolor}
-                                autoCapitalize='none'
-                                onChangeText={(value) => setValue('address', value)}
-                                ref={input01}
-                                returnKeyType="next"
-                                onSubmitEditing={() => input02.current.focus()}
-                            />
-                        </View>
-                        {errors.address && <Text style={globalstyle.errorField}>{errors.address.message}</Text>}
+                        <SelectModal placeholder="Select Required Degree Level" selected={degreelevel} label="Degree Level" list={degreelevellist} onSelect={_handleFunctionalArea} showLabel={true} />
+                        <TextInput style={{ display: 'none' }} {...register('degreelevel', { value: '', required: 'Degree level is required', })} />
+                        {errors.degreelevel && <Text style={globalstyle.errorField}>{errors.degreelevel.message}</Text>}
 
-                        <View style={[globalstyle.inputbox, { paddingHorizontal: 0 }]}>
-                            {/* <Icon color={colors.primary} name={'map-pin'} size={18} /> */}
-                            <TextInput
-                                style={globalstyle.inputfield}
-                                placeholder="Select Required Degree Level"
-                                // value=''
-                                {...register('address', {
-                                    value: '',
-                                    // required: 'Email Address is required',
-                                    // pattern: {
-                                    //     value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-                                    //     message: "Please provide valid email"
-                                    // },
-                                })}
-                                defaultValue={''}
-                                placeholderTextColor={colors.placeholdercolor}
-                                autoCapitalize='none'
-                                onChangeText={(value) => setValue('address', value)}
-                                ref={input01}
-                                returnKeyType="next"
-                                onSubmitEditing={() => input02.current.focus()}
-                            />
-                        </View>
-                        {errors.address && <Text style={globalstyle.errorField}>{errors.address.message}</Text>}
+                        <SelectModal placeholder="Select Required Job Experience" selected={jobexperience} label="Experience" list={exprience_level} onSelect={_handleFunctionalArea} showLabel={true} />
+                        <TextInput style={{ display: 'none' }} {...register('jobexperience', { value: '', required: 'Experience is required', })} />
+                        {errors.jobexperience && <Text style={globalstyle.errorField}>{errors.jobexperience.message}</Text>}
 
-                        <View style={[globalstyle.inputbox, { paddingHorizontal: 0 }]}>
-                            {/* <Icon color={colors.primary} name={'map-pin'} size={18} /> */}
-                            <TextInput
-                                style={globalstyle.inputfield}
-                                placeholder="Select Required Job Experience"
-                                // value=''
-                                {...register('address', {
-                                    value: '',
-                                    // required: 'Email Address is required',
-                                    // pattern: {
-                                    //     value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-                                    //     message: "Please provide valid email"
-                                    // },
-                                })}
-                                defaultValue={''}
-                                placeholderTextColor={colors.placeholdercolor}
-                                autoCapitalize='none'
-                                onChangeText={(value) => setValue('address', value)}
-                                ref={input01}
-                                returnKeyType="next"
-                                onSubmitEditing={() => input02.current.focus()}
-                            />
-                        </View>
-                        {errors.address && <Text style={globalstyle.errorField}>{errors.address.message}</Text>}
                     </View>
 
                     <View style={{ flexDirection: 'row', marginBottom: 20, marginTop: 10 }}>

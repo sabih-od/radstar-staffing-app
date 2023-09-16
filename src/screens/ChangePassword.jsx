@@ -70,7 +70,7 @@ const ChangePassword = (props) => {
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <View style={isIPad && globalstyle.authscreencontainer}>
                         {/* <ScrollView> */}
-                        <View style={[globalstyle.authLogoContainer, {  }]}>
+                        <View style={[globalstyle.authLogoContainer, {}]}>
                             <Image
                                 source={require('./../../assets/images/logo-with-text.png')}
                                 style={globalstyle.authLogo}

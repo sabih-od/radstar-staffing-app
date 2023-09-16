@@ -19,7 +19,7 @@ const globalstyle = StyleSheet.create({
   inputfield: { paddingHorizontal: 15, paddingVertical: IOS ? 15 : 13, fontFamily: fonts.latoRegular, width: '100%', color: colors.black, fontSize: isIPad ? 17 : fontSize },
   inputlabel: { fontFamily: fonts.latoRegular, fontSize: 14, marginBottom: 5, color: colors.grey },
   alreadysignin: { flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20, },
-  errorField: { color: colors.red, fontFamily: fonts.latoRegular, fontSize: 12, marginTop: 2, marginLeft: 15 },
+  errorField: { color: colors.red, fontFamily: fonts.latoRegular, fontSize: 12, marginTop: 0, marginBottom: 10, },
   alreadyaccount: { fontFamily: fonts.latoRegular, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', color: fontcolor, fontSize: isIPad ? 18 : fontSize },
   actionauthtext: { color: colors.primary, fontFamily: fonts.latoBold, fontSize: isIPad ? 18 : 14 },
   // authlefticon: { color: colors.deepblue },

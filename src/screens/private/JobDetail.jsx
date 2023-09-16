@@ -150,7 +150,7 @@ const JobDetail = (props) => {
                 <View style={{ marginBottom: 20, }}>
                     <SectionTitle title={"Related Jobs"} />
                     {jobslist.map((item, index) => {
-                        console.log('index => ', index)
+                        // console.log('index => ', index)
                         const last = 6 == index + 1 ? true : false;
                         return (<JobItem key={index} item={item} index={index} candidates={true} last={last} />)
                     })}
