@@ -56,7 +56,9 @@ const globalstyle = StyleSheet.create({
 
   detaildate: { fontFamily: fonts.latoBold, color: colors.primary, marginBottom: 5, fontSize: isIPad ? 15 : 13 },
   detailtitle: { fontFamily: fonts.latoBold, color: colors.black, fontSize: isIPad ? 32 : 28, marginBottom: 5 },
-  detaildescription: { fontFamily: fonts.latoRegular, color: colors.black, fontSize: isIPad ? 18 : 15 }
+  detaildescription: { fontFamily: fonts.latoRegular, color: colors.black, fontSize: isIPad ? 18 : 15 },
+
+  noproductfound: { fontFamily: fonts.latoRegular }
 
   // inputBox: { marginBottom: 10, },
   // inputField: { borderWidth: 1, borderColor: '#eee', paddingHorizontal: 14, paddingVertical: 10, borderRadius: 7, fontFamily: fonts.latoRegular, backgroundColor: colors.white, fontSize: 13 },

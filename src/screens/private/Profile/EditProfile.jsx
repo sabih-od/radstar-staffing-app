@@ -17,6 +17,7 @@ import {
 } from 'react-native';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/Feather';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import CameraModal from '../../../components/modal/CameraModal';
 
 // import auth from '@react-native-firebase/auth';
@@ -51,9 +52,20 @@ import ExperienceItem from '../../../components/ExperienceItem';
 
 const resumes = [
   { id: 1, title: 'My Resume', default: true },
-  { id: 2, title: 'Abcd Resume', default: true },
-  { id: 3, title: 'Rasdy Resume', default: true },
-  { id: 4, title: 'Uahsn Resume', default: true },
+  { id: 2, title: 'Abcd Resume', default: false },
+  { id: 3, title: 'Rasdy Resume', default: false },
+  { id: 4, title: 'Uahsn Resume', default: false },
+]
+
+const documents = [
+  { id: 1, title: 'Drug Test Form', url: 'https://radstarstaffing.com/storage/4/jpg2pdf.pdf' },
+  { id: 2, title: 'Education Verification Form', url: '' },
+  { id: 3, title: 'Employment History Record', url: 'https://radstarstaffing.com/storage/4/jpg2pdf.pdf' },
+  { id: 4, title: 'Release Authorization Record', url: '' },
+  { id: 5, title: 'HIPAA', url: '' },
+  { id: 6, title: 'Health Statement From Physician', url: 'https://radstarstaffing.com/storage/4/jpg2pdf.pdf' },
+  { id: 7, title: 'Identification Photo', url: 'https://radstarstaffing.com/storage/4/jpg2pdf.pdf' },
+  { id: 8, title: 'U.S. Passport', url: '' }
 ]
 
 const EditProfile = props => {
@@ -344,12 +356,15 @@ const EditProfile = props => {
       </View>
       {/* <View style={{ width: '50%',   justifyContent: 'center', alignItems: 'flex-start', paddingLeft: 15, paddingRight: 5 }}><Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize, color: colors.grey }}>{item?.default ? 'Default' : ''}</Text></View> */}
       <View style={{ width: '50%', flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'flex-start', paddingLeft: 15, paddingRight: 5 }}>
+        {showFile && <TouchableOpacity style={{ width: 35, paddingVertical: 15, alignItems: 'center' }}>
+          <Ionicons name={item.default ? "heart" : "heart-outline"} style={{ fontSize: fontSize + 2, color: '#005393' }} />
+        </TouchableOpacity>}
         {showView && <TouchableOpacity style={{ width: 35, paddingVertical: 15, alignItems: 'center' }}>
           <Icon name="eye" style={{ fontSize: fontSize, color: colors.black }} />
         </TouchableOpacity>}
-        <TouchableOpacity style={{ width: 35, paddingVertical: 15, alignItems: 'center' }}>
+        {!showFile && <TouchableOpacity style={{ width: 35, paddingVertical: 15, alignItems: 'center' }}>
           <Icon name="edit-2" style={{ fontSize: fontSize, color: '#005393' }} />
-        </TouchableOpacity>
+        </TouchableOpacity>}
         <TouchableOpacity style={{ width: 35, paddingVertical: 15, alignItems: 'center' }}>
           <Icon name="trash" style={{ fontSize: fontSize, color: '#f008' }} />
         </TouchableOpacity>
@@ -359,9 +374,28 @@ const EditProfile = props => {
 
   const [showExperience, setShowExperience] = useState(false);
   const [showEducation, setShowEducation] = useState(false);
+  const [showSkillsModal, setShowSkillsModal] = useState(false);
+
 
   const _handleExperienceSubmit = (data) => {
 
+  }
+
+  function removeSkillsItem(id) {
+    const skills = [...user.skills]
+    const removedskills = skills.filter(x => x.id != id);
+    console.log('removeSkillsItem skills => ', removedskills)
+    setUser(prev => ({ ...prev, skills: removedskills }))
+  }
+
+  const _handleEditExperience = (item) => {
+    console.log('item => ', item)
+    setShowExperience(item)
+  }
+
+  const _handleEditEducation = (item) => {
+    console.log('item => ', item)
+    setShowEducation(item)
   }
 
   return (
@@ -831,7 +865,7 @@ const EditProfile = props => {
                     <View style={{ paddingVertical: 20, paddingHorizontal: 15, backgroundColor: '#fff', marginHorizontal: -15 }}>
                       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                         <SectionTitle title={"Curriculum Vitae"} />
-                        <TouchableOpacity style={{ width: 30, height: 30, borderRadius: 10, backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                        <TouchableOpacity style={{ width: 30, height: 30, borderRadius: 10, backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', marginBottom: 15, }}>
                           <Icon name="plus" style={{ color: colors.white }} />
                           {/* <Text style={{ color: colors.white, fontFamily: fonts.latoRegular, fontSize: fontSize }}>Upload</Text> */}
                         </TouchableOpacity>
@@ -856,12 +890,30 @@ const EditProfile = props => {
                         <SectionTitle title={"Documents"} />
                         <Text style={{ fontFamily: fonts.latoRegular, color: colors.grey, marginTop: -7, marginBottom: 10, fontSize: fontSize - 1 }}>All documents must be uploaded for job application submission eligibility.</Text>
                       </View>
-                      <TouchableOpacity style={{ width: 30, height: 30, borderRadius: 10, backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                      {/* <TouchableOpacity style={{ width: 30, height: 30, borderRadius: 10, backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
                         <Icon name="plus" style={{ color: colors.white }} />
-                        {/* <Text style={{ color: colors.white, fontFamily: fonts.latoRegular, fontSize: fontSize }}>Upload</Text> */}
-                      </TouchableOpacity>
+                      </TouchableOpacity> */}
                     </View>
 
+                    {documents && documents.map((item, index) => {
+
+                      return <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 15, paddingVertical: 13, backgroundColor: item?.id % 2 == 0 ? '#fff' : '#f1f1f1', marginHorizontal: -15 }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                          <Icon name={item.url == '' ? "circle" : "check-circle"} style={{ color: colors.primary, fontSize: fontSize, marginRight: 10 }} />
+                          <Text style={{ fontFamily: fonts.latoRegular }}> {item?.title}</Text>
+                        </View>
+                        <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }}>
+                          <Icon name="eye" style={{ marginLeft: 5, fontSize: fontSize, color: colors.primary }} />
+                        </TouchableOpacity>
+                        {/* <TouchableOpacity style={{ borderRadius: 10, flexDirection: 'row', alignItems: 'center' }}>
+                          <Text style={{ fontFamily: fonts.latoRegular, color: colors.primary }}>Upload</Text>
+                          <Icon name="file" style={{ marginLeft: 5, fontSize: fontSize, color: colors.primary }} />
+                        </TouchableOpacity> */}
+                        {/* <TouchableOpacity style={{ backgroundColor: colors.primary, paddingVertical: 4, paddingHorizontal: 15, borderRadius: 10 }}>
+                          <Text style={{ fontFamily: fonts.latoRegular, color: colors.white }}>Select</Text>
+                        </TouchableOpacity> */}
+                      </TouchableOpacity>
+                    })}
 
 
 
@@ -878,29 +930,29 @@ const EditProfile = props => {
                         <Icon name={showExperience ? "minus" : "plus"} style={{ color: colors.white }} />
                       </TouchableOpacity>
                     </View>
-                    {showExperience && <AddExperience />}
+                    {showExperience && <AddExperience item={showExperience} />}
                     {user?.experience && user?.experience.map((item, index) => {
-                      return <ExperienceItem key={index} item={item} showTrash={true} />
+                      return <ExperienceItem key={index} item={item} showTrash={true} handleEdit={_handleEditEducation} />
                     })}
 
                     <View style={{ height: 1, backgroundColor: '#ddd', marginTop: 10, marginBottom: 15 }} />
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
                       <View style={{ width: width - 70 }}>
                         <SectionTitle title={"Education"} />
-                        <Text style={{ fontFamily: fonts.latoRegular, color: colors.grey, marginTop: -7, marginBottom: 10, fontSize: fontSize - 1 }}>Add experience according to your job.</Text>
+                        <Text style={{ fontFamily: fonts.latoRegular, color: colors.grey, marginTop: -7, marginBottom: 10, fontSize: fontSize - 1 }}>Add education according to your job.</Text>
                       </View>
                       <TouchableOpacity
                         activeOpacity={0.9}
-                        onPress={() => setShowEducation(prev => !prev)}
+                        onPress={() => setShowEducation(true)}
                         style={{ width: 30, height: 30, borderRadius: 10, marginTop: 0, backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
                         <Icon name={showEducation ? "minus" : "plus"} style={{ color: colors.white }} />
                       </TouchableOpacity>
                     </View>
 
 
-                    {showEducation && <AddExperience />}
+                    {showEducation && <AddExperience item={showEducation} />}
                     {user?.education && user?.education.map((item, index) => {
-                      return <ExperienceItem key={index} item={item} education={true} showTrash={true} />
+                      return <ExperienceItem key={index} item={item} education={true} showTrash={true} handleEdit={_handleEditExperience} />
                     })}
 
                     <View style={{ height: 1, backgroundColor: '#ddd', marginTop: 10, marginBottom: 25 }} />
@@ -909,15 +961,20 @@ const EditProfile = props => {
                         <SectionTitle title={"Skills"} />
                         <Text style={{ fontFamily: fonts.latoRegular, color: colors.grey, marginTop: -7, marginBottom: 10, fontSize: fontSize - 1 }}>All skills must be uploaded for job application submission eligibility.</Text>
                       </View>
-                      <TouchableOpacity style={{ width: 30, height: 30, borderRadius: 10, backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                      <TouchableOpacity onPress={() => setShowSkillsModal(true)} style={{ width: 30, height: 30, borderRadius: 10, backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
                         <Icon name="plus" style={{ color: colors.white }} />
                         {/* <Text style={{ color: colors.white, fontFamily: fonts.latoRegular, fontSize: fontSize }}>Upload</Text> */}
                       </TouchableOpacity>
                     </View>
-                    <View style={{ marginHorizontal: -15 }}>
+                    <View style={{ marginHorizontal: -15, flexDirection: 'row', flexWrap: 'wrap', paddingHorizontal: 15, }}>
                       {user?.skills && user?.skills.map((item, index) => {
-                        return <TableRow keys={index} item={item} />
+                        return <View style={{ backgroundColor: '#ddd', paddingVertical: 8, paddingLeft: 10, marginRight: 5, marginBottom: 5, borderRadius: 10, flexDirection: 'row', alignItems: 'center' }}>
+                          <Text style={{ fontFamily: fonts.latoRegular, color: colors.black, fontSize: fontSize - 1 }}>{item.title}</Text>
+                          <TouchableOpacity activeOpacity={0.7} onPress={() => removeSkillsItem(item.id)} style={{ width: 25, height: 20, justifyContent: 'center', alignItems: 'center' }}><Icon name="x" style={{ color: colors.primary }} /></TouchableOpacity>
+                        </View>
+                        // return <TableRow keys={index} item={item} />
                       })}
+                      {user?.skills && user?.skills.length == 0 && <Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize, color: colors.grey }}>No skills added</Text>}
                     </View>
 
                     <View style={{ height: 1, backgroundColor: '#ddd', marginTop: 25, marginBottom: 25 }} />

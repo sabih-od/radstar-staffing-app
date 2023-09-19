@@ -16,6 +16,7 @@ import SearchInput from '../../components/SearchInput'
 import jobslist from "../../data/jobslist";
 import { convertToK } from "../../helpers/services";
 import SectionTitle from './../../components/SectionTitle';
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const DashboardBox = ({ item }) => {
     return (
@@ -38,8 +39,10 @@ const topBoxesCandidates = [
     { count: 127, title: 'Application Sent', icon: 'file' },
 ];
 const topBoxesEmployer = [
+    { count: 2460, title: 'Profile Views', icon: 'eye' },
     { count: 246, title: 'Open Jobs', icon: 'archive' },
-    { count: 426000, title: 'Followers', icon: 'users' }
+    { count: 426000, title: 'Followers', icon: 'users' },
+    { count: 127, title: 'Applications Received', icon: 'file' },
 ];
 
 const Home = (props) => {
@@ -52,9 +55,12 @@ const Home = (props) => {
                     {props.isCandidate && <DashboardBox item={topBoxesCandidates[1]} />}
                     {props.isCandidate && <DashboardBox item={topBoxesCandidates[2]} />}
                     {props.isCandidate && <DashboardBox item={topBoxesCandidates[3]} />}
-                    {!props.isCandidate && <DashboardBox item={topBoxesCandidates[0]} />}
-                    {!props.isCandidate && <DashboardBox item={topBoxesCandidates[1]} />}
+                    {!props.isCandidate && <DashboardBox item={topBoxesEmployer[0]} />}
+                    {!props.isCandidate && <DashboardBox item={topBoxesEmployer[1]} />}
+                    {!props.isCandidate && <DashboardBox item={topBoxesEmployer[2]} />}
+                    {!props.isCandidate && <DashboardBox item={topBoxesEmployer[3]} />}
                 </View>
+                {/* <GestureHandlerRootView> */}
                 <View style={{ marginTop: -13, marginBottom: 20, }}>
                     <SectionTitle title={props.isCandidate ? "Recommended Jobs" : "Posted Jobs"} />
                     {/* <Text style={{ fontSize: (fontSize + 4), fontFamily: fonts.latoBold, marginBottom: 5 }}>{props.isCandidate ? "Recommended Jobs" : "Posted Jobs"}</Text> */}
@@ -64,6 +70,7 @@ const Home = (props) => {
                         return (<JobItem key={index} item={item} index={index} candidates={true} last={last} />)
                     })}
                 </View>
+                {/* </GestureHandlerRootView> */}
             </ScrollView>
         </SafeAreaView>
     )

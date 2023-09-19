@@ -80,11 +80,16 @@ const Stack = createStackNavigator();
 //     )
 // }
 
-const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
+const MainStackNavigation = (props) => {
+
+    const { navigation, style, notificationBadge, isCandidate } = props;
 
     const drawerProgress = useDrawerProgress();
     const animatedStyle = useAnimatedStyle(() => {
-        const scale = interpolate(drawerProgress.value, [0, 1], [1, 0.8], {
+        const scale = interpolate(drawerProgress.value, [0, 1], [1, 0.9], {
+            extrapolateRight: Extrapolate.CLAMP,
+        });
+        const rotateY = interpolate(drawerProgress.value, [0, 1], [0, 5], {
             extrapolateRight: Extrapolate.CLAMP,
         });
         const borderRadius = interpolate(drawerProgress.value, [0, 1], [0, 15], {
@@ -92,7 +97,11 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
         });
         return {
             overflow: 'hidden',
-            transform: [{ scale }],
+            transform: [
+                { perspective: 100 },
+                { rotateY: `-${rotateY}deg` },
+                { scale }
+            ],
             borderRadius,
         };
     });
@@ -224,16 +233,27 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
                     headerTitleStyle: globalstyle.headerTitleStyle,
                     headerLeft: () => <GoBackIcon navigation={navigation} />,
                     headerRight: () => <View style={{ flexDirection: 'row' }}>
-                        <TouchableOpacity
+                        {isCandidate && <TouchableOpacity
                             activeOpacity={0.8}
                             onPress={() => {
                                 console.log('Notifications Clicked');
                                 // props.navigation.navigate('Notifications');
                             }}
-                            style={[globalstyle.notibadge, {width: 20}]}>
+                            style={[globalstyle.notibadge, { width: 20 }]}>
                             <Icon name={'heart'} size={20} color={colors.black} />
                             {/* {props.notificationBadge > 0 && <View style={globalstyle.badge}></View>} */}
-                        </TouchableOpacity><NotificationIcon navigation={navigation} />
+                        </TouchableOpacity>}
+                        <NotificationIcon navigation={navigation} />
+                        {!isCandidate && <TouchableOpacity
+                            activeOpacity={0.8}
+                            onPress={() => {
+                                console.log('More Clicked');
+                                // props.navigation.navigate('Notifications');
+                            }}
+                            style={[globalstyle.notibadge, { width: 20 }]}>
+                            <Icon name={'more-vertical'} size={20} color={colors.black} />
+                            {/* {props.notificationBadge > 0 && <View style={globalstyle.badge}></View>} */}
+                        </TouchableOpacity>}
                     </View>
                 }}
             />
@@ -262,17 +282,18 @@ const MainStackNavigation = ({ navigation, style, notificationBadge }) => {
     </Animated.View>
 }
 
-// const setStateToProps = (state) => ({
-//     notificationBadge: state.appstate.notificationBadge
-// })
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         //   LogOut: bindActionCreators(LogOut, dispatch),
-//     }
-// }
-// export default connect(setStateToProps, mapDispatchToProps)(MainStackNavigation);
+const setStateToProps = (state) => ({
+    // notificationBadge: state.appstate.notificationBadge,
+    isCandidate: state.appstate.isCandidate,
+})
+const mapDispatchToProps = (dispatch) => {
+    return {
+        //   LogOut: bindActionCreators(LogOut, dispatch),
+    }
+}
+export default connect(setStateToProps, mapDispatchToProps)(MainStackNavigation);
 
-export default MainStackNavigation;
+// export default MainStackNavigation;
 
 const styles = StyleSheet.create({
     stack: { flex: 1 },

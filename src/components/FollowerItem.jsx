@@ -5,10 +5,11 @@ const { fonts, colors, fontSize } = require('../theme')
 
 const FollowerItem = (props) => {
     const navigation = useNavigation();
+    const { item } = props
     return (
         <TouchableOpacity
             activeOpacity={0.9}
-            onPress={() => { navigation.navigate('Profile') }}
+            onPress={() => { navigation.navigate('Profile', { user: item }) }}
             style={[{ marginBottom: 10, paddingBottom: 10 },
             !props.last && { borderBottomColor: '#ddd', borderBottomWidth: 1, },
             props.index % 2 && { backgroundColor: '#fff', paddingHorizontal: 15, paddingTop: 10, marginHorizontal: -15, marginTop: -11, borderBottomColor: 'transparent' },
@@ -18,12 +19,12 @@ const FollowerItem = (props) => {
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Image source={require('./../../assets/images/dummy-profile-image.png')} style={{ width: 50, height: 50, borderRadius: 15, resizeMode: 'cover', marginRight: 10 }} />
                 <View>
-                    <Text style={{ fontFamily: fonts.latoBold, fontSize: (fontSize + 2), marginBottom: 3 }}>{props?.item?.title}</Text>
-                    <Text style={{ fontFamily: fonts.latoRegular, fontSize: (fontSize - 2) }}>{props?.item?.designation} - {props?.item?.company}</Text>
+                    <Text style={{ fontFamily: fonts.latoBold, fontSize: (fontSize + 2), marginBottom: 3 }}>{item?.title}</Text>
+                    <Text style={{ fontFamily: fonts.latoRegular, fontSize: (fontSize - 2) }}>{item?.designation} - {item?.company}</Text>
                     {/* <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8 }}> */}
                     {/* <Text style={{ fontFamily: fonts.latoRegular, fontSize: (fontSize - 3) }}>Full Time / Permanent</Text>
                         <View style={{ width: 1, height: 10, backgroundColor: '#999', marginHorizontal: 7, marginBottom: -2 }} />
-                        <Text style={{ fontFamily: fonts.latoRegular, fontSize: (fontSize - 3) }}>{props?.item?.shift}</Text>
+                        <Text style={{ fontFamily: fonts.latoRegular, fontSize: (fontSize - 3) }}>{item?.shift}</Text>
                         <View style={{ width: 1, height: 10, backgroundColor: '#999', marginHorizontal: 7, marginBottom: -2 }} />
                         <Text style={{ fontFamily: fonts.latoRegular, fontSize: (fontSize - 3) }}>California</Text> */}
                     {/* <Text style={{ fontFamily: fonts.latoRegular, fontSize: (fontSize - 3), backgroundColor: colors.primary, color: colors.white, paddingHorizontal: 10, paddingVertical: 6, marginRight: 6 }}>Full Time / Permanent</Text>

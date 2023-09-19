@@ -12,6 +12,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		5E22857A2AB91A5C00280583 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E2285792AB91A5C00280583 /* Ionicons.ttf */; };
 		5EB2D9F22AB23CB400C3E7B9 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EB2D9F12AB23CB400C3E7B9 /* EvilIcons.ttf */; };
 		5EC0B8D22AAA47B400D2F5AC /* Lato-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EC0B8C82AAA47B400D2F5AC /* Lato-LightItalic.ttf */; };
 		5EC0B8D32AAA47B400D2F5AC /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EC0B8C92AAA47B400D2F5AC /* Lato-Light.ttf */; };
@@ -53,6 +54,7 @@
 		5709B34CF0A7D63546082F79 /* Pods-RadstarStaffing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadstarStaffing.release.xcconfig"; path = "Target Support Files/Pods-RadstarStaffing/Pods-RadstarStaffing.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-RadstarStaffing-RadstarStaffingTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadstarStaffing-RadstarStaffingTests.debug.xcconfig"; path = "Target Support Files/Pods-RadstarStaffing-RadstarStaffingTests/Pods-RadstarStaffing-RadstarStaffingTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-RadstarStaffing.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RadstarStaffing.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E2285792AB91A5C00280583 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		5EB2D9EF2AB23C9100C3E7B9 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		5EB2D9F12AB23CB400C3E7B9 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		5EC0B8C82AAA47B400D2F5AC /* Lato-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-LightItalic.ttf"; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				5E2285792AB91A5C00280583 /* Ionicons.ttf */,
 				5EB2D9EF2AB23C9100C3E7B9 /* EvilIcons.ttf */,
 				5EB2D9F12AB23CB400C3E7B9 /* EvilIcons.ttf */,
 				5EC0B8DC2AAA47EE00D2F5AC /* Entypo.ttf */,
@@ -297,6 +300,7 @@
 				5EC0B8DB2AAA47B400D2F5AC /* Lato-Thin.ttf in Resources */,
 				5EC0B8DF2AAA47EE00D2F5AC /* Feather.ttf in Resources */,
 				5EB2D9F22AB23CB400C3E7B9 /* EvilIcons.ttf in Resources */,
+				5E22857A2AB91A5C00280583 /* Ionicons.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -554,6 +558,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = RadstarStaffing/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -584,6 +589,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = RadstarStaffing/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

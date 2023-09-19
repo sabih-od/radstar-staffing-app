@@ -37,11 +37,22 @@ const JobDetail = (props) => {
 
     return (
         <SafeAreaView style={globalstyle.fullview}>
-            <ScrollView style={{ paddingHorizontal: 15 }} showsVerticalScrollIndicator={false}>
+            {/* <View style={{ position: 'absolute', right: 0, top: 0, zIndex: 1, backgroundColor: '#f9f9f9', borderBottomLeftRadius: 10, overflow: 'hidden',  }}>
+                <TouchableOpacity onPress={() => { }} activeOpacity={0.8} style={{ paddingHorizontal: 25, paddingVertical: 12, borderBottomWidth: 1, borderBlockColor: '#eee', flexDirection: 'row', alignItems: 'center' }}>
+                    <Icon name="users" style={{ fontSize: fontSize, marginRight: 15 }} /><Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize }}>Candidates</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => { }} activeOpacity={0.8} style={{ paddingHorizontal: 25, paddingVertical: 12, borderBottomWidth: 1, borderBlockColor: '#eee', flexDirection: 'row', alignItems: 'center' }}>
+                    <Icon name="users" style={{ fontSize: fontSize, marginRight: 15 }} /><Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize }}>Delete Job</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => { }} activeOpacity={0.8} style={{ paddingHorizontal: 25, paddingVertical: 12, flexDirection: 'row', alignItems: 'center' }}>
+                    <Icon name="users" style={{ fontSize: fontSize, marginRight: 15 }} /><Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize }}>Edit Job</Text>
+                </TouchableOpacity>
+            </View> */}
 
+            <ScrollView style={{ paddingHorizontal: 15 }} showsVerticalScrollIndicator={false}>
                 <View style={{ backgroundColor: colors.white, paddingVertical: 20, paddingHorizontal: 18, width: width, marginLeft: -15, marginBottom: 15, }}>
                     <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
-                        <Image source={require('./../../../assets/images/no-image.png')} style={{ width: 65, height: 65, resizeMode: 'cover', borderRadius: 15, marginRight: 13 }} />
+                        <Image source={require('./../../../assets/images/no-image.png')} style={{ width: 70, height: 70, resizeMode: 'cover', borderRadius: 15, marginRight: 13 }} />
                         <View>
                             <Text style={{ fontSize: (fontSize + 5), fontFamily: fonts.latoBold, marginBottom: 3, color: colors.black }}>{item?.title}</Text>
                             <Text style={{ fontSize: fontSize, fontFamily: fonts.latoRegular, color: colors.grey }}>{item?.company}</Text>

@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import Icon from 'react-native-vector-icons/Feather';
 import EvilIcon from 'react-native-vector-icons/EvilIcons';
 import Toast from 'react-native-toast-message';
-import { colors, fontSize, fonts, height, width } from "../../theme";
+import { colors, fontSize, fonts, height, isIPad, width } from "../../theme";
 import globalstyle from "../../theme/style";
 import { useForm } from "react-hook-form";
 import JobItem from "../../components/JobItem";
@@ -16,41 +16,82 @@ import SearchInput from '../../components/SearchInput'
 import jobslist from "../../data/jobslist";
 import FilterModal from "../../components/modal/FilterModal";
 
+const LIMIT = 30;
 const Jobs = (props) => {
 
     const [loading, isLoading] = useState(false);
     const [filterShow, toggleFilter] = useState(false);
+    const [pageno, setPageno] = useState(1);
+    const [limit, setLimit] = useState(LIMIT);
+    const [refreshing, setRefreshing] = useState(false);
+    const [loadmore, setLoadmore] = useState(false);
 
     useEffect(() => {
         console.log('props => ', props)
         props.route.params && props.navigation.setOptions({ headerTitle: props.route.params.headerTitle });
     }, [props.route.params])
 
+    const [jobsList, setJobList] = useState(jobslist)
+
     function _onSearch(value) {
         // setLoading(true)
         // props.GetSearchPost({ page, limit, title: value })
     }
 
+    const _handleRefresh = () => {
+        setRefreshing(true)
+        setPageno(1);
+        // setLimit(itemslimit);
+        // props.GetEventsList({ pageno, limit });
+        console.log('_handleRefresh ');
+        setTimeout(() => {
+            setRefreshing(false)
+            setJobList(jobslist);
+        }, 2000)
+    }
+
+    const _handleFavourite = (item) => {
+        console.log('item => ', item);
+        const result = jobsList.filter(x => x.id != item && x);
+        console.log('result => ', result.length)
+        setJobList(result);
+    }
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={globalstyle.fullview}>
             <FilterModal visible={filterShow} setVisible={toggleFilter} />
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 15 }}>
-                <SearchInput onSearch={_onSearch} value={props?.route?.params?.title} width={width - 40 - 30 - 10} />
+                <SearchInput onSearch={_onSearch} value={props?.route?.params?.title} width={width - 40 - 30 - 10} placeholder={`Search ${props?.route?.params?.headerTitle || 'Jobs'}...`} />
                 <TouchableOpacity onPress={() => toggleFilter(true)} activeOpacity={0.9} style={{ width: 40, height: 40, backgroundColor: colors.white, alignItems: 'center', justifyContent: 'center', borderRadius: 10 }}>
                     <Icon name="sliders" style={{ fontSize: fontSize, color: colors.grey }} />
                 </TouchableOpacity>
             </View>
-            <ScrollView style={{ padding: 15 }} showsVerticalScrollIndicator={false}>
+            <FlatList
+                data={jobsList}
+                contentContainerStyle={{ paddingHorizontal: 15 }}
+                showsVerticalScrollIndicator={false}
+                keyExtractor={item => String(item.id)}
+                refreshing={refreshing}
+                ListEmptyComponent={() => !loading && <View style={{ height: height - 230,  alignItems: 'center', padding: 10, justifyContent: 'center' }}>
+                    <Icon name="alert-triangle" style={{ fontSize: isIPad ? 40 : 40, color: colors.primary, marginBottom: 10, opacity: 0.2 }} />
+                    <Text style={{ fontFamily: fonts.latoRegular, textAlign: 'center', color: colors.grey, fontSize: isIPad ? 16 : 14 }}>No record found</Text>
+                </View>}
+                onRefresh={_handleRefresh}
+                renderItem={({ item, index }) => {
+                    const last = 20 == index + 1 ? true : false;
+                    return <JobItem key={index} item={item} index={index} candidates={true} last={last} handleFavourite={_handleFavourite} />
+                }}
+            />
+            {/* <ScrollView style={{ padding: 15 }} showsVerticalScrollIndicator={false}>
                 <View style={{ marginBottom: 20, marginTop: -15 }}>
-                    {/* <Text style={{ fontSize: (fontSize + 4), fontFamily: fonts.latoBold, marginBottom: 20 }}>Job Openings</Text> */}
-                    {jobslist.map((item, index) => {
+                    <Text style={{ fontSize: (fontSize + 4), fontFamily: fonts.latoBold, marginBottom: 20 }}>Job Openings</Text>
+                    {jobsList.map((item, index) => {
                         // console.log('index => ', index)
                         const last = 20 == index + 1 ? true : false;
-                        return (<JobItem key={index} item={item} index={index} candidates={true} last={last} />)
+                        return (<JobItem key={index} item={item} index={index} candidates={true} last={last} handleFavourite={_handleFavourite} />)
                     })}
                 </View>
-            </ScrollView>
+            </ScrollView> */}
         </SafeAreaView>
     )
 }

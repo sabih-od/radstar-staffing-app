@@ -31,13 +31,21 @@ const Profile = props => {
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [filePath, setFilePath] = useState(null);
 
-  const [user, setUser] = useState(props.userInfo);
+  const [user, setUser] = useState(null);
+
+  // useEffect(() => {
+  //   console.log('Profile props.userInfo => ', props.userInfo);
+  //   setUser(props.userInfo);
+  // }, [props.userInfo])
 
   useEffect(() => {
-    console.log('Profile props.userInfo => ', props.userInfo);
-    setUser(props.userInfo);
-  }, [props.userInfo])
-
+    if (props.route.params?.user) {
+      console.log('props.route.params => ', props.route.params.user)
+      setUser(props.route.params.user)
+    } else {
+      setUser(props.userInfo);
+    }
+  }, [props.route.params])
 
   const prevFilePathRef = useRef(filePath);
   const prevDeleteUserResRef = useRef(props.deleteUserResponse);
@@ -132,39 +140,45 @@ const Profile = props => {
                   defaultSource={require('./../../../../assets/images/no-image.png')}
                   style={{ width: '100%', height: '100%', borderRadius: 120, resizeMode: 'cover', }}
                 />
-                <TouchableOpacity
-                  activeOpacity={0.8}
-                  style={{ borderWidth: 1, borderColor: colors.white, position: 'absolute', right: 5, bottom: 2, zIndex: 1, alignItems: 'center', justifyContent: 'center', width: 40, height: 40, borderRadius: 40, backgroundColor: colors.white, }}
-                  onPress={() => {
-                    props.navigation.navigate('EditProfile')
-                    // setShowModal(true);
-                  }}>
-                  <Icon name="edit-2" size={isIPad ? 20 : 18} color={colors.primary} />
-                </TouchableOpacity>
+                {user?.id == props?.userInfo?.id &&
+                  <TouchableOpacity
+                    activeOpacity={0.8}
+                    style={{ borderWidth: 1, borderColor: colors.white, position: 'absolute', right: 5, bottom: 2, zIndex: 1, alignItems: 'center', justifyContent: 'center', width: 40, height: 40, borderRadius: 40, backgroundColor: colors.white, }}
+                    onPress={() => {
+                      props.navigation.navigate('EditProfile')
+                      // setShowModal(true);
+                    }}>
+                    <Icon name="edit-2" size={isIPad ? 20 : 18} color={colors.primary} />
+                  </TouchableOpacity>}
               </View>
               <Text style={{ fontFamily: fonts.latoBold, fontSize: (fontSize + 6), textAlign: 'center', color: colors.black, marginBottom: 6 }}>{
-                // `${user?.first_name} ${user?.last_name}`
-                'Kalen Parker'
+                user?.id == props.userInfo.id ? `${user?.first_name} ${user?.last_name}` : user?.title
+                // 'Kalen Parker'
               }</Text>
-              <Text style={{ fontFamily: fonts.latoRegular, fontSize: (fontSize + 2), textAlign: 'center', color: colors.primary, marginBottom: 3 }}>Medical Laboratory Technician</Text>
-              <Text style={{ fontFamily: fonts.latoRegular, fontSize: (fontSize), textAlign: 'center', color: colors.grey, marginBottom: 30 }}>MedixGen Health</Text>
+              <Text style={{ fontFamily: fonts.latoRegular, fontSize: (fontSize + 2), textAlign: 'center', color: colors.primary, marginBottom: 3 }}>{user?.designation}</Text>
+              <Text style={{ fontFamily: fonts.latoRegular, fontSize: (fontSize), textAlign: 'center', color: colors.grey, marginBottom: 30 }}>{user?.company}</Text>
 
               <View style={{ backgroundColor: colors.white, padding: 20, borderRadius: 15 }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 30, marginTop: 10 }}>
-                  <View style={{ alignItems: 'center', width: (width / 3) - 28, backgroundColor: colors.white, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={[{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 30, marginTop: 10, }, user?.id != props.userInfo.id && { width: '100%', alignSelf: 'center' }]}>
+                  <View style={{ alignItems: 'center', width: user?.id != props.userInfo.id ? '33%' : '33%', backgroundColor: colors.white, alignItems: 'center', justifyContent: 'center' }}>
                     <Text style={{ fontFamily: fonts.latoBold, fontSize: fontSize + 6, marginBottom: 3 }}>{convertToK(12367)}</Text>
                     <Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize }}>Followings</Text>
                   </View>
                   <View style={{ width: 1, height: 20, backgroundColor: '#888' }} />
-                  <View style={{ alignItems: 'center', width: (width / 3) - 28, backgroundColor: colors.white, alignItems: 'center', justifyContent: 'center' }}>
+                  <View style={{ alignItems: 'center', width: user?.id != props.userInfo.id ? '33%' : '33%', backgroundColor: colors.white, alignItems: 'center', justifyContent: 'center' }}>
                     <Text style={{ fontFamily: fonts.latoBold, fontSize: fontSize + 6, marginBottom: 3 }}>{convertToK(3122)}</Text>
                     <Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize }}>Profile Views</Text>
                   </View>
-                  <View style={{ width: 1, height: 20, backgroundColor: '#888' }} />
-                  <View style={{ alignItems: 'center', width: (width / 3) - 28, backgroundColor: colors.white, alignItems: 'center', justifyContent: 'center' }}>
-                    <Text style={{ fontFamily: fonts.latoBold, fontSize: fontSize + 6, marginBottom: 3 }}>{convertToK(54)}</Text>
-                    <Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize }}>Jobs Apply</Text>
-                  </View>
+                  {user?.id != props.userInfo.id && <><View style={{ width: 1, height: 20, backgroundColor: '#888' }} />
+                    <View style={{ alignItems: 'center', width: '33%', backgroundColor: colors.white, alignItems: 'center', justifyContent: 'center' }}>
+                      <Text style={{ fontFamily: fonts.latoBold, fontSize: fontSize + 6, marginBottom: 3 }}>{convertToK(5298)}</Text>
+                      <Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize }}>Follwers</Text>
+                    </View></>}
+                  {user?.id == props.userInfo.id && <><View style={{ width: 1, height: 20, backgroundColor: '#888' }} />
+                    <View style={{ alignItems: 'center', width: '33%', backgroundColor: colors.white, alignItems: 'center', justifyContent: 'center' }}>
+                      <Text style={{ fontFamily: fonts.latoBold, fontSize: fontSize + 6, marginBottom: 3 }}>{convertToK(54)}</Text>
+                      <Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize }}>Jobs Applied</Text>
+                    </View></>}
                 </View>
 
                 <View>
@@ -176,10 +190,10 @@ const Profile = props => {
                     <Icon name="map-pin" style={{ color: colors.primary, marginRight: 15, fontSize: fontSize }} />
                     <Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize, color: colors.grey }}>Serenica Tranquilis Harmonyville, USA</Text>
                   </View>
-                  <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
+                  {user?.phone && <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
                     <Icon name="phone" style={{ color: colors.primary, marginRight: 15, fontSize: fontSize }} />
                     <Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize, color: colors.grey }}>{`${user?.phone}`}</Text>
-                  </View>
+                  </View>}
                   <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
                     <Icon name="mail" style={{ color: colors.primary, marginRight: 15, fontSize: fontSize }} />
                     <Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize, color: colors.grey }}>{`${user?.email}`}</Text>

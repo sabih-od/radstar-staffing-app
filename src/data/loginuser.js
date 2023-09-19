@@ -55,10 +55,10 @@ export const candidate = {
     state: 1,
     city: 1,
     experience: [
-        { title: 'Physician', company: 'VitalMed Group', startdate: '2023-01-16', enddate: null, },
-        { title: 'Medical Laboratory Technician', company: 'Precision HealthTech', startdate: '2022-03-23', enddate: '2023-01-16', },
-        { title: 'Pharmacist', company: 'BioTech Medical', startdate: '2022-03-23', enddate: '2023-01-01', },
-        { title: 'Physical Therapist', company: 'LifeCure Technologies', startdate: '2020-08-11', enddate: '2021-06-26', }
+        { title: 'Physician', company: 'VitalMed Group', startdate: '2023-01-16', enddate: null, description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.' },
+        { title: 'Medical Laboratory Technician', company: 'Precision HealthTech', startdate: '2022-03-23', enddate: '2023-01-16', description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.' },
+        { title: 'Pharmacist', company: 'BioTech Medical', startdate: '2022-03-23', enddate: '2023-01-01', description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.' },
+        { title: 'Physical Therapist', company: 'LifeCure Technologies', startdate: '2020-08-11', enddate: '2021-06-26', description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.' }
     ],
     education: [
         { title: 'Doctor of Osteopathic Medicine', company: 'VitalMed Group', startdate: '2023-01-16', enddate: null, },

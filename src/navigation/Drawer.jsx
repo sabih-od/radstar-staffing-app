@@ -17,11 +17,16 @@ import { localNotificationService } from '../helpers/firebase/LocalNotificationS
 import messaging from '@react-native-firebase/messaging';
 import { GetProfileApiCall } from '../redux/reducers/AuthReducer';
 
-import { connectSocket, getSocket } from '../helpers/socket-manager';
+// import { connectSocket, getSocket } from '../helpers/socket-manager';
 import { useAppState } from '../hooks/useAppState';
 import { EditProfileApiCall } from '../redux/reducers/UserStateReducer';
+// import { connectPusher } from '../helpers/pusher';
 
 const DrawerContent = (props) => {
+
+  // useEffect(() => {
+  //   connectPusher();
+  // }, [])
 
   // const appState = useAppState();
   // console.log('appState status => ', appState);

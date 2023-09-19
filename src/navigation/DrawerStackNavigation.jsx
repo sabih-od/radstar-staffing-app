@@ -61,7 +61,7 @@ export default DrawerStackNavigation;
 
 const styles = StyleSheet.create({
     stack: { flex: 1 },
-    drawerStyles: { flex: 1, width: isIPad ? '60%' : '70%' },
+    drawerStyles: { flex: 1, width: isIPad ? '60%' : '60%' },
     // badge: { backgroundColor: '#f00', color: '#fff', position: 'absolute', width: 11, height: 11, top: -2, right: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', borderRadius: 10, zIndex: 1, fontSize: 12, fontFamily: fonts.primary, },
     notibadge: { position: 'relative' },
     headerlogo: { height: 40, resizeMode: 'contain' },

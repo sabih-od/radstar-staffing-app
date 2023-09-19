@@ -8,6 +8,7 @@ const jobslist = [
         expired_date: 1694132573000,
         shift: 'Night Shift',
         position: 10,
+        isFavourite: false,
         image: require('./../../assets/images/default_icon.png')
     },
     {
@@ -19,6 +20,7 @@ const jobslist = [
         expired_date: 1695601373000,
         shift: 'Night Shift',
         position: 8,
+        isFavourite: true,
         image: require('./../../assets/images/default_icon.png')
     },
     {
@@ -30,6 +32,7 @@ const jobslist = [
         expired_date: 1694478173000,
         shift: 'Night Shift',
         position: 3,
+        isFavourite: true,
         image: require('./../../assets/images/default_icon.png')
     },
     {
@@ -41,6 +44,7 @@ const jobslist = [
         expired_date: 1695601373000,
         shift: 'Morning Shift',
         position: 5,
+        isFavourite: false,
         image: require('./../../assets/images/default_icon.png')
     },
     {
@@ -52,6 +56,7 @@ const jobslist = [
         expired_date: 1695601373000,
         shift: 'First Shift',
         position: 13,
+        isFavourite: false,
         image: require('./../../assets/images/default_icon.png')
     },
     {
@@ -63,6 +68,7 @@ const jobslist = [
         expired_date: 1695601373000,
         shift: 'Night Shift',
         position: 2,
+        isFavourite: true,
         image: require('./../../assets/images/default_icon.png')
     },
     {
@@ -74,6 +80,7 @@ const jobslist = [
         expired_date: 1695601373000,
         shift: 'Night Shift',
         position: 6,
+        isFavourite: false,
         image: require('./../../assets/images/default_icon.png')
     },
     {
@@ -85,6 +92,7 @@ const jobslist = [
         expired_date: 1695601373000,
         shift: 'Night Shift',
         position: 9,
+        isFavourite: true,
         image: require('./../../assets/images/default_icon.png')
     },
 ];

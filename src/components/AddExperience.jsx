@@ -22,6 +22,7 @@ const CheckBox = props => {
 
 const AddExperience = props => {
 
+    console.log('props => ', props)
     const { handleSubmit, formState: { errors }, register, setValue, } = useForm();
 
     return (
@@ -43,11 +44,11 @@ const AddExperience = props => {
                     <TextInput
                         style={globalstyle.inputfield}
                         placeholder="Experience Title"
-                        defaultValue={''}
+                        defaultValue={props?.item?.title || ''}
                         // editable={isEditable}
                         placeholderTextColor={colors.placeholdercolor}
                         {...register('experience_title', {
-                            value: '',
+                            value: props?.item?.title || '',
                             required: 'Experience title is required',
                         })}
                         onChangeText={value => setValue('experience_title', value)}
@@ -63,11 +64,11 @@ const AddExperience = props => {
                     <TextInput
                         style={globalstyle.inputfield}
                         placeholder="Company Name"
-                        defaultValue={''}
+                        defaultValue={props?.item?.company || ''}
                         // editable={isEditable}
                         placeholderTextColor={colors.placeholdercolor}
                         {...register('company_name', {
-                            value: '',
+                            value: props?.item?.company || '',
                             required: 'Company name is required',
                         })}
                         onChangeText={value => setValue('company_name', value)}
@@ -84,11 +85,11 @@ const AddExperience = props => {
                         <TextInput
                             style={globalstyle.inputfield}
                             placeholder="Start Date"
-                            defaultValue={''}
+                            defaultValue={props?.item?.startdate || ''}
                             // editable={isEditable}
                             placeholderTextColor={colors.placeholdercolor}
                             {...register('start_date', {
-                                value: '',
+                                value: props?.item?.startdate || '',
                                 required: 'Start date is required',
                             })}
                             onChangeText={value => setValue('start_date', value)}
@@ -102,11 +103,11 @@ const AddExperience = props => {
                         <TextInput
                             style={globalstyle.inputfield}
                             placeholder="End Date"
-                            defaultValue={''}
+                            defaultValue={props?.item?.enddate || ''}
                             // editable={isEditable}
                             placeholderTextColor={colors.placeholdercolor}
                             {...register('end_date', {
-                                value: '',
+                                value: props?.item?.enddate || '',
                                 required: 'End date is required',
                             })}
                             onChangeText={value => setValue('end_date', value)}
@@ -118,27 +119,26 @@ const AddExperience = props => {
                 </View>
                 {errors.end_date && (<Text style={globalstyle.errorField}> {errors.end_date.message} </Text>)}
 
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginVertical: 10 }}>
+                {/* <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginVertical: 10 }}>
                     <Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize, }}>By Shift</Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap' }}>
                         <CheckBox title="Yes" checked={false} />
                         <View style={{ width: 10 }} />
                         <CheckBox title="No" checked={true} />
                     </View>
-                </View>
-
+                </View> */}
 
                 {/* <Text style={[globalstyle.inputlabel, { marginTop: 10 }]}>Current Salary</Text> */}
                 <View style={[globalstyle.inputbox, { paddingHorizontal: 0, height: 170, alignItems: 'flex-start', paddingVertical: 10 }]}>
                     <TextInput
                         style={globalstyle.inputfield}
                         placeholder="Experience Description"
-                        defaultValue={''}
+                        defaultValue={props?.item?.description || ''}
                         // editable={isEditable}
                         multiline={true}
                         placeholderTextColor={colors.placeholdercolor}
                         {...register('experience_description', {
-                            value: '',
+                            value: props?.item?.description || '',
                             required: 'Experience description is required',
                         })}
                         onChangeText={value => setValue('experience_description', value)}
@@ -148,7 +148,10 @@ const AddExperience = props => {
                     />
                 </View>
                 {errors.experience_description && (<Text style={globalstyle.errorField}> {errors.experience_description.message} </Text>)}
-
+                <TouchableOpacity onPress={() => { }} style={{ backgroundColor: colors.primary, paddingHorizontal: 15, marginTop: 5, alignSelf: 'flex-end', paddingVertical: 10, borderRadius: 10, flexDirection: 'row', alignItems: 'center' }}>
+                    <Text style={{ fontFamily: fonts.latoRegular, color: colors.white }}>{props.item ? 'Update' : 'Save'}</Text>
+                    <Icon name="save" style={{ color: colors.white, fontSize: fontSize, marginLeft: 8 }} />
+                </TouchableOpacity>
             </View>
         </View>
     )
