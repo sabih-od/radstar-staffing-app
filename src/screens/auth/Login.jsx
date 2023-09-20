@@ -18,6 +18,8 @@ import { showToast } from "../../helpers/toastConfig";
 import axios from "axios";
 import { candidate, employer } from "../../data/loginuser";
 
+import Logo from "./../../../assets/images/logo.svg";
+
 
 const Login = (props) => {
 
@@ -138,8 +140,9 @@ const Login = (props) => {
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <View style={isIPad && globalstyle.authscreencontainer}>
                         <View style={globalstyle.authLogoContainer}>
-                            <Image source={require('./../../../assets/images/logo-with-text.png')} style={globalstyle.authLogo} />
-                            {/* <Text style={globalstyle.authheading}>Login</Text> */}
+                            {/* <Image source={require('./../../../assets/images/logo-with-text.png')} style={globalstyle.authLogo} /> */}
+                            <Logo width={160} height={140} style={{marginBottom: 25}} />
+                            <Text style={globalstyle.authheading}>Login</Text>
                             <Text style={globalstyle.authdescription}>Add Your Details to Login</Text>
                         </View>
 

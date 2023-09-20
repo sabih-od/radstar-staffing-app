@@ -66,7 +66,7 @@ const Register = (props) => {
                                 source={require('./../../../assets/images/logo-with-text.png')}
                                 style={globalstyle.authLogo}
                             />
-                            {/* <Text style={globalstyle.authheading}>Welcome</Text> */}
+                            <Text style={globalstyle.authheading}>Register</Text>
                             <Text style={globalstyle.authdescription}>Add Your Details to Sign Up</Text>
                         </View>
                         <View>

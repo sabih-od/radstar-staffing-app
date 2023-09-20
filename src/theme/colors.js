@@ -3,6 +3,7 @@ const colorScheme = {
   // primary: '#653090',
   primary: '#005393',
   secondary: '#0281b4',
+  green: 'rgba(103, 146, 141, 1.0)',
   black: '#000',
   white: '#fff',
   red: '#f00',

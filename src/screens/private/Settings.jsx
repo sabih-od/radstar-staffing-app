@@ -17,19 +17,16 @@ const Settings = props => {
                 activeOpacity={0.8}
                 style={{ paddingVertical: 18, paddingHorizontal: 20, flexDirection: 'row', alignItems: 'center', backgroundColor: colors.white, borderBottomWidth: 1, borderBottomColor: '#eee' }}
                 onPress={() => {
-
                     if (props.icon == 'log-out') {
                         // props.navigation.closeDrawer();
                         props.navigation.navigate('Dashboard');
                         props.LogOut();
-
                     } else {
                         props.nav && props.navigation.navigate(props.nav)
                     }
-
                 }}
             >
-                <Icon name={props?.icon} style={{ marginRight: 15, fontSize: fontSize + 1 }} />
+                <Icon name={props?.icon} style={{ marginRight: 15, fontSize: fontSize + 1, color: colors.primary }} />
                 <Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize }}>{props?.title}</Text>
             </TouchableOpacity>
         )
@@ -41,12 +38,12 @@ const Settings = props => {
                 <View style={{ paddingHorizontal: 15, paddingVertical: 20 }}>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <Image
-                            source={require('./../../../assets/images/dummy-profile-image.png')}
+                            source={{ uri: props.userInfo.profile_picture }}
                             defaultSource={require('./../../../assets/images/dummy-profile-image.png')}
-                            style={{ width: 70, height: 70, marginRight: 13, borderRadius: 70, overflow: 'hidden' }}
+                            style={{ width: 75, height: 75, marginRight: 13, borderRadius: 70, overflow: 'hidden' }}
                         />
                         <View>
-                            <Text style={{ fontFamily: fonts.latoBold, marginBottom: 2, fontSize: fontSize + 4 }}>{props.isCandidate ? `${props.userInfo.first_name} ${props.userInfo.first_name}` : `${props.userInfo.full_name}`}</Text>
+                            <Text style={{ fontFamily: fonts.latoBold, marginBottom: 2, fontSize: fontSize + 4 }}>{props.isCandidate ? `${props.userInfo.first_name} ${props.userInfo.last_name}` : `${props.userInfo.full_name}`}</Text>
                             <Text style={{ fontFamily: fonts.latoRegular, marginBottom: 2, fontSize: fontSize + 1, color: colors.primary }}>{!props.isCandidate ? props.userInfo.email : 'Medical Laboratory Technician'}</Text>
                             <Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize - 1, color: colors.grey }}>{!props.isCandidate ? props.userInfo.phone : 'MedixGen Health'}</Text>
                         </View>

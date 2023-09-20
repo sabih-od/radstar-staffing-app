@@ -7,7 +7,7 @@ const candidateslist = [
         company: 'MedixGen Health',
         description: 'Registered Nurses are responsible for providing patient care, administering medications, monitoring vital signs, and assisting doctors and other healthcare professionals in various medical settings such as hospitals, clinics, and long-term care facilities. They also educate patients and their families on health conditions and treatments',
         last_updated: 1689290885995,
-        image: require('./../../assets/images/default_icon.png'),
+        image: require('./../../assets/images/user-01.png'),
         phone: "+8129875682",
         experience: [
             { id: 1, title: 'Physician', company: 'VitalMed Group', startdate: '2023-01-16', enddate: null, description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.' },
@@ -40,7 +40,7 @@ const candidateslist = [
         company: 'MedixGen Health',
         description: 'Registered Nurses are responsible for providing patient care, administering medications, monitoring vital signs, and assisting doctors and other healthcare professionals in various medical settings such as hospitals, clinics, and long-term care facilities. They also educate patients and their families on health conditions and treatments',
         last_updated: 1689290885995,
-        image: require('./../../assets/images/default_icon.png'),
+        image: require('./../../assets/images/user-02.png'),
         phone: "+8129875682",
         experience: [
             { id: 1, title: 'Physician', company: 'VitalMed Group', startdate: '2023-01-16', enddate: null, description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.' },
@@ -73,7 +73,7 @@ const candidateslist = [
         company: 'MedixGen Health',
         description: 'Registered Nurses are responsible for providing patient care, administering medications, monitoring vital signs, and assisting doctors and other healthcare professionals in various medical settings such as hospitals, clinics, and long-term care facilities. They also educate patients and their families on health conditions and treatments',
         last_updated: 1689290885995,
-        image: require('./../../assets/images/default_icon.png'),
+        image: require('./../../assets/images/user-03.png'),
         phone: "+8129875682",
         experience: [
             { id: 1, title: 'Physician', company: 'VitalMed Group', startdate: '2023-01-16', enddate: null, description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.' },
@@ -106,7 +106,7 @@ const candidateslist = [
         company: 'MedixGen Health',
         description: 'Registered Nurses are responsible for providing patient care, administering medications, monitoring vital signs, and assisting doctors and other healthcare professionals in various medical settings such as hospitals, clinics, and long-term care facilities. They also educate patients and their families on health conditions and treatments',
         last_updated: 1689290885995,
-        image: require('./../../assets/images/default_icon.png'),
+        image: require('./../../assets/images/dummy-profile-image.png'),
         phone: "+8129875682",
         experience: [
             { id: 1, title: 'Physician', company: 'VitalMed Group', startdate: '2023-01-16', enddate: null, description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.' },
@@ -139,7 +139,7 @@ const candidateslist = [
         company: 'MedixGen Health',
         description: 'Registered Nurses are responsible for providing patient care, administering medications, monitoring vital signs, and assisting doctors and other healthcare professionals in various medical settings such as hospitals, clinics, and long-term care facilities. They also educate patients and their families on health conditions and treatments',
         last_updated: 1689290885995,
-        image: require('./../../assets/images/default_icon.png'),
+        image: require('./../../assets/images/user-04.png'),
         phone: "+8129875682",
         experience: [
             { id: 1, title: 'Physician', company: 'VitalMed Group', startdate: '2023-01-16', enddate: null, description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.' },
@@ -172,7 +172,7 @@ const candidateslist = [
         company: 'MedixGen Health',
         description: 'Registered Nurses are responsible for providing patient care, administering medications, monitoring vital signs, and assisting doctors and other healthcare professionals in various medical settings such as hospitals, clinics, and long-term care facilities. They also educate patients and their families on health conditions and treatments',
         last_updated: 1689290885995,
-        image: require('./../../assets/images/default_icon.png'),
+        image: require('./../../assets/images/user-05.png'),
         phone: "+8129875682",
         experience: [
             { id: 1, title: 'Physician', company: 'VitalMed Group', startdate: '2023-01-16', enddate: null, description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.' },
@@ -205,7 +205,7 @@ const candidateslist = [
         company: 'MedixGen Health',
         description: 'Registered Nurses are responsible for providing patient care, administering medications, monitoring vital signs, and assisting doctors and other healthcare professionals in various medical settings such as hospitals, clinics, and long-term care facilities. They also educate patients and their families on health conditions and treatments',
         last_updated: 1689290885995,
-        image: require('./../../assets/images/default_icon.png'),
+        image: require('./../../assets/images/dummy-profile-image.png'),
         phone: "+8129875682",
         experience: [
             { id: 1, title: 'Physician', company: 'VitalMed Group', startdate: '2023-01-16', enddate: null, description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.' },
@@ -238,7 +238,7 @@ const candidateslist = [
         company: 'MedixGen Health',
         description: 'Registered Nurses are responsible for providing patient care, administering medications, monitoring vital signs, and assisting doctors and other healthcare professionals in various medical settings such as hospitals, clinics, and long-term care facilities. They also educate patients and their families on health conditions and treatments',
         last_updated: 1689290885995,
-        image: require('./../../assets/images/default_icon.png'),
+        image: require('./../../assets/images/user-01.png'),
         phone: "+8129875682",
         experience: [
             { id: 1, title: 'Physician', company: 'VitalMed Group', startdate: '2023-01-16', enddate: null, description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.' },
@@ -271,7 +271,7 @@ const candidateslist = [
         company: 'MedixGen Health',
         description: 'Registered Nurses are responsible for providing patient care, administering medications, monitoring vital signs, and assisting doctors and other healthcare professionals in various medical settings such as hospitals, clinics, and long-term care facilities. They also educate patients and their families on health conditions and treatments',
         last_updated: 1689290885995,
-        image: require('./../../assets/images/default_icon.png'),
+        image: require('./../../assets/images/user-02.png'),
         phone: "+8129875682",
         experience: [
             { id: 1, title: 'Physician', company: 'VitalMed Group', startdate: '2023-01-16', enddate: null, description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.' },
@@ -304,7 +304,7 @@ const candidateslist = [
         company: 'MedixGen Health',
         description: 'Registered Nurses are responsible for providing patient care, administering medications, monitoring vital signs, and assisting doctors and other healthcare professionals in various medical settings such as hospitals, clinics, and long-term care facilities. They also educate patients and their families on health conditions and treatments',
         last_updated: 1689290885995,
-        image: require('./../../assets/images/default_icon.png'),
+        image: require('./../../assets/images/user-03.png'),
         phone: "+8129875682",
         experience: [
             { id: 1, title: 'Physician', company: 'VitalMed Group', startdate: '2023-01-16', enddate: null, description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.' },
@@ -337,7 +337,7 @@ const candidateslist = [
         company: 'MedixGen Health',
         description: 'Registered Nurses are responsible for providing patient care, administering medications, monitoring vital signs, and assisting doctors and other healthcare professionals in various medical settings such as hospitals, clinics, and long-term care facilities. They also educate patients and their families on health conditions and treatments',
         last_updated: 1689290885995,
-        image: require('./../../assets/images/default_icon.png'),
+        image: require('./../../assets/images/dummy-profile-image.png'),
         phone: "+8129875682",
         experience: [
             { id: 1, title: 'Physician', company: 'VitalMed Group', startdate: '2023-01-16', enddate: null, description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.' },
@@ -370,7 +370,7 @@ const candidateslist = [
         company: 'MedixGen Health',
         description: 'Registered Nurses are responsible for providing patient care, administering medications, monitoring vital signs, and assisting doctors and other healthcare professionals in various medical settings such as hospitals, clinics, and long-term care facilities. They also educate patients and their families on health conditions and treatments',
         last_updated: 1689290885995,
-        image: require('./../../assets/images/default_icon.png'),
+        image: require('./../../assets/images/user-04.png'),
         phone: "+8129875682",
         experience: [
             { id: 1, title: 'Physician', company: 'VitalMed Group', startdate: '2023-01-16', enddate: null, description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.' },
@@ -403,7 +403,7 @@ const candidateslist = [
         company: 'MedixGen Health',
         description: 'Registered Nurses are responsible for providing patient care, administering medications, monitoring vital signs, and assisting doctors and other healthcare professionals in various medical settings such as hospitals, clinics, and long-term care facilities. They also educate patients and their families on health conditions and treatments',
         last_updated: 1689290885995,
-        image: require('./../../assets/images/default_icon.png'),
+        image: require('./../../assets/images/user-05.png'),
         phone: "+8129875682",
         experience: [
             { id: 1, title: 'Physician', company: 'VitalMed Group', startdate: '2023-01-16', enddate: null, description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.' },
@@ -436,7 +436,7 @@ const candidateslist = [
         company: 'MedixGen Health',
         description: 'Registered Nurses are responsible for providing patient care, administering medications, monitoring vital signs, and assisting doctors and other healthcare professionals in various medical settings such as hospitals, clinics, and long-term care facilities. They also educate patients and their families on health conditions and treatments',
         last_updated: 1689290885995,
-        image: require('./../../assets/images/default_icon.png'),
+        image: require('./../../assets/images/dummy-profile-image.png'),
         phone: "+8129875682",
         experience: [
             { id: 1, title: 'Physician', company: 'VitalMed Group', startdate: '2023-01-16', enddate: null, description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.' },
@@ -469,7 +469,7 @@ const candidateslist = [
         company: 'MedixGen Health',
         description: 'Registered Nurses are responsible for providing patient care, administering medications, monitoring vital signs, and assisting doctors and other healthcare professionals in various medical settings such as hospitals, clinics, and long-term care facilities. They also educate patients and their families on health conditions and treatments',
         last_updated: 1689290885995,
-        image: require('./../../assets/images/default_icon.png'),
+        image: require('./../../assets/images/dummy-profile-image.png'),
         phone: "+8129875682",
         experience: [
             { id: 1, title: 'Physician', company: 'VitalMed Group', startdate: '2023-01-16', enddate: null, description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.' },
@@ -502,7 +502,7 @@ const candidateslist = [
         company: 'MedixGen Health',
         description: 'Registered Nurses are responsible for providing patient care, administering medications, monitoring vital signs, and assisting doctors and other healthcare professionals in various medical settings such as hospitals, clinics, and long-term care facilities. They also educate patients and their families on health conditions and treatments',
         last_updated: 1689290885995,
-        image: require('./../../assets/images/default_icon.png'),
+        image: require('./../../assets/images/dummy-profile-image.png'),
         phone: "+8129875682",
         experience: [
             { id: 1, title: 'Physician', company: 'VitalMed Group', startdate: '2023-01-16', enddate: null, description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.' },
@@ -535,7 +535,7 @@ const candidateslist = [
         company: 'MedixGen Health',
         description: 'Registered Nurses are responsible for providing patient care, administering medications, monitoring vital signs, and assisting doctors and other healthcare professionals in various medical settings such as hospitals, clinics, and long-term care facilities. They also educate patients and their families on health conditions and treatments',
         last_updated: 1689290885995,
-        image: require('./../../assets/images/default_icon.png'),
+        image: require('./../../assets/images/dummy-profile-image.png'),
         phone: "+8129875682",
         experience: [
             { id: 1, title: 'Physician', company: 'VitalMed Group', startdate: '2023-01-16', enddate: null, description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.' },
@@ -568,7 +568,7 @@ const candidateslist = [
         company: 'MedixGen Health',
         description: 'Registered Nurses are responsible for providing patient care, administering medications, monitoring vital signs, and assisting doctors and other healthcare professionals in various medical settings such as hospitals, clinics, and long-term care facilities. They also educate patients and their families on health conditions and treatments',
         last_updated: 1689290885995,
-        image: require('./../../assets/images/default_icon.png'),
+        image: require('./../../assets/images/dummy-profile-image.png'),
         phone: "+8129875682",
         experience: [
             { id: 1, title: 'Physician', company: 'VitalMed Group', startdate: '2023-01-16', enddate: null, description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.' },
@@ -601,7 +601,7 @@ const candidateslist = [
         company: 'MedixGen Health',
         description: 'Registered Nurses are responsible for providing patient care, administering medications, monitoring vital signs, and assisting doctors and other healthcare professionals in various medical settings such as hospitals, clinics, and long-term care facilities. They also educate patients and their families on health conditions and treatments',
         last_updated: 1689290885995,
-        image: require('./../../assets/images/default_icon.png'),
+        image: require('./../../assets/images/dummy-profile-image.png'),
         phone: "+8129875682",
         experience: [
             { id: 1, title: 'Physician', company: 'VitalMed Group', startdate: '2023-01-16', enddate: null, description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.' },
@@ -634,7 +634,7 @@ const candidateslist = [
         company: 'MedixGen Health',
         description: 'Registered Nurses are responsible for providing patient care, administering medications, monitoring vital signs, and assisting doctors and other healthcare professionals in various medical settings such as hospitals, clinics, and long-term care facilities. They also educate patients and their families on health conditions and treatments',
         last_updated: 1689290885995,
-        image: require('./../../assets/images/default_icon.png'),
+        image: require('./../../assets/images/dummy-profile-image.png'),
         phone: "+8129875682",
         experience: [
             { id: 1, title: 'Physician', company: 'VitalMed Group', startdate: '2023-01-16', enddate: null, description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.' },

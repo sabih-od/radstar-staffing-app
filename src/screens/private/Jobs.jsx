@@ -15,6 +15,7 @@ import JobItem from "../../components/JobItem";
 import SearchInput from '../../components/SearchInput'
 import jobslist from "../../data/jobslist";
 import FilterModal from "../../components/modal/FilterModal";
+import JobCandidateListModal from "../../components/modal/JobCandidateListModal";
 
 const LIMIT = 30;
 const Jobs = (props) => {
@@ -57,9 +58,30 @@ const Jobs = (props) => {
         setJobList(result);
     }
 
+    const [showCandidateModal, setShowCandidateModal] = useState(false);
+    const [moreItem, setMoreItem] = useState(false);
+    const _handleAction = (value) => {
+        setShowCandidateModal(false)
+        if (value != 'edit' && value != 'delete') {
+            props.navigation.navigate('Followers', { headerTitle: 'Candidate List' });
+        }
+        console.log('_handleAction => ', value)
+    }
+
+    const _handleSetMoreItem = (item) => {
+        setShowCandidateModal(true)
+        setMoreItem(item);
+    }
+
     return (
         <SafeAreaView style={globalstyle.fullview}>
             <FilterModal visible={filterShow} setVisible={toggleFilter} />
+            <JobCandidateListModal
+                item={moreItem}
+                visible={showCandidateModal}
+                setShowCandidateModal={setShowCandidateModal}
+                handleAction={_handleAction}
+            />
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 15 }}>
                 <SearchInput onSearch={_onSearch} value={props?.route?.params?.title} width={width - 40 - 30 - 10} placeholder={`Search ${props?.route?.params?.headerTitle || 'Jobs'}...`} />
                 <TouchableOpacity onPress={() => toggleFilter(true)} activeOpacity={0.9} style={{ width: 40, height: 40, backgroundColor: colors.white, alignItems: 'center', justifyContent: 'center', borderRadius: 10 }}>
@@ -72,14 +94,14 @@ const Jobs = (props) => {
                 showsVerticalScrollIndicator={false}
                 keyExtractor={item => String(item.id)}
                 refreshing={refreshing}
-                ListEmptyComponent={() => !loading && <View style={{ height: height - 230,  alignItems: 'center', padding: 10, justifyContent: 'center' }}>
+                ListEmptyComponent={() => !loading && <View style={{ height: height - 230, alignItems: 'center', padding: 10, justifyContent: 'center' }}>
                     <Icon name="alert-triangle" style={{ fontSize: isIPad ? 40 : 40, color: colors.primary, marginBottom: 10, opacity: 0.2 }} />
                     <Text style={{ fontFamily: fonts.latoRegular, textAlign: 'center', color: colors.grey, fontSize: isIPad ? 16 : 14 }}>No record found</Text>
                 </View>}
                 onRefresh={_handleRefresh}
                 renderItem={({ item, index }) => {
                     const last = 20 == index + 1 ? true : false;
-                    return <JobItem key={index} item={item} index={index} candidates={true} last={last} handleFavourite={_handleFavourite} />
+                    return <JobItem key={index} item={item} index={index} candidates={true} last={last} handleFavourite={_handleFavourite} setMoreItem={_handleSetMoreItem} />
                 }}
             />
             {/* <ScrollView style={{ padding: 15 }} showsVerticalScrollIndicator={false}>

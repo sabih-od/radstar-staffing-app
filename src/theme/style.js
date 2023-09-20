@@ -7,8 +7,8 @@ const globalstyle = StyleSheet.create({
   authContainer: { ...StyleSheet.absoluteFillObject, height: height, resizeMode: 'cover' },
   authLogoContainer: { alignItems: 'center' },
   authLogo: { width: 150, height: 130, resizeMode: 'contain', marginBottom: 25, },
-  authheading: { fontFamily: fonts.latoBold, fontSize: isIPad ? 44 : fontSize * 2, color: colors.black },
-  authdescription: { fontFamily: fonts.latoRegular, fontSize: isIPad ? 22 : 17, color: colors.grey, marginBottom: 15 },
+  authheading: { fontFamily: fonts.latoBold, fontSize: isIPad ? 44 : fontSize * 2, color: colors.black, marginBottom: 5 },
+  authdescription: { fontFamily: fonts.latoRegular, fontSize: isIPad ? 22 : fontSize + 1, color: '#555', marginBottom: 25 },
   authSubmitButton: { backgroundColor: colors.primary, padding: 17, borderRadius: 14, marginTop: 15 },
   authSubmitButtonText: { color: colors.white, fontFamily: fonts.latoBold, fontSize: isIPad ? 17 : 15, textAlign: 'center', textTransform: 'uppercase' },
 

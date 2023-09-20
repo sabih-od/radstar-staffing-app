@@ -13,7 +13,7 @@ const { fonts, colors, fontSize, width } = require('../theme')
 
 const JobItem = (props) => {
     const navigation = useNavigation()
-    const { item } = props
+    const { item, setMoreItem } = props
 
     const translateX = useSharedValue(0);
     const gestureHandler = useAnimatedGestureHandler({
@@ -143,7 +143,10 @@ const JobItem = (props) => {
                     <Ionicons name={item?.isFavourite ? "heart" : "heart-outline"} style={{ fontSize: fontSize + 5, color: colors.primary }} />
                 </TouchableOpacity>}
                 {!props.isCandidate && <TouchableOpacity
-                    onPress={() => { setShowMore(prev => !prev) }}
+                    onPress={() => {
+                        // setShowMore(prev => !prev) 
+                        setMoreItem && setMoreItem(item)
+                    }}
                     activeOpacity={0.8} style={{
                         width: 40, height: 40, alignItems: 'center', justifyContent: 'center', borderRadius: 10,
                         // backgroundColor: '#ddd',
@@ -153,7 +156,16 @@ const JobItem = (props) => {
 
                 {/* {showMore && <View style={{ position: 'absolute', right: 15, top: 0, zIndex: 1, backgroundColor: '#f9f9f9', borderBottomLeftRadius: 10, overflow: 'hidden', }}>
                     <TouchableOpacity onPress={() => { }} activeOpacity={0.8} style={{ paddingHorizontal: 25, paddingVertical: 12, borderBottomWidth: 1, borderBlockColor: '#eee', flexDirection: 'row', alignItems: 'center' }}>
-                        <Icon name="users" style={{ fontSize: fontSize, marginRight: 15 }} /><Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize }}>Candidates</Text>
+                        <Icon name="users" style={{ fontSize: fontSize, marginRight: 15 }} /><Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize }}>List Candidates</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => { }} activeOpacity={0.8} style={{ paddingHorizontal: 25, paddingVertical: 12, borderBottomWidth: 1, borderBlockColor: '#eee', flexDirection: 'row', alignItems: 'center' }}>
+                        <Icon name="users" style={{ fontSize: fontSize, marginRight: 15 }} /><Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize }}>Short Listed Candidates</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => { }} activeOpacity={0.8} style={{ paddingHorizontal: 25, paddingVertical: 12, borderBottomWidth: 1, borderBlockColor: '#eee', flexDirection: 'row', alignItems: 'center' }}>
+                        <Icon name="users" style={{ fontSize: fontSize, marginRight: 15 }} /><Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize }}>Hired Candidates</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => { }} activeOpacity={0.8} style={{ paddingHorizontal: 25, paddingVertical: 12, borderBottomWidth: 1, borderBlockColor: '#eee', flexDirection: 'row', alignItems: 'center' }}>
+                        <Icon name="users" style={{ fontSize: fontSize, marginRight: 15 }} /><Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize }}>Rejected Candidates</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { }} activeOpacity={0.8} style={{ paddingHorizontal: 25, paddingVertical: 12, borderBottomWidth: 1, borderBlockColor: '#eee', flexDirection: 'row', alignItems: 'center' }}>
                         <Icon name="users" style={{ fontSize: fontSize, marginRight: 15 }} /><Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize }}>Delete Job</Text>

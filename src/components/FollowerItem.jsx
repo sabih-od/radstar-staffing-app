@@ -5,11 +5,13 @@ const { fonts, colors, fontSize } = require('../theme')
 
 const FollowerItem = (props) => {
     const navigation = useNavigation();
-    const { item } = props
+    const { item } = props;
+
+    const IMAGE_SIZE = props?.showSalary ? 65 : 63;
     return (
         <TouchableOpacity
             activeOpacity={0.9}
-            onPress={() => { navigation.navigate('Profile', { user: item }) }}
+            onPress={() => { navigation.navigate('Profile', { user: item, fromcandidate: props?.showSalary ? true : false }) }}
             style={[{ marginBottom: 10, paddingBottom: 10 },
             !props.last && { borderBottomColor: '#ddd', borderBottomWidth: 1, },
             props.index % 2 && { backgroundColor: '#fff', paddingHorizontal: 15, paddingTop: 10, marginHorizontal: -15, marginTop: -11, borderBottomColor: 'transparent' },
@@ -17,10 +19,14 @@ const FollowerItem = (props) => {
             ]}
         >
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Image source={require('./../../assets/images/dummy-profile-image.png')} style={{ width: 50, height: 50, borderRadius: 15, resizeMode: 'cover', marginRight: 10 }} />
+                <Image source={item?.image}
+                    defaultSource={require('./../../assets/images/dummy-profile-image.png')} style={{ width: IMAGE_SIZE, height: IMAGE_SIZE, borderRadius: IMAGE_SIZE, resizeMode: 'cover', marginRight: 10 }} />
                 <View>
-                    <Text style={{ fontFamily: fonts.latoBold, fontSize: (fontSize + 2), marginBottom: 3 }}>{item?.title}</Text>
-                    <Text style={{ fontFamily: fonts.latoRegular, fontSize: (fontSize - 2) }}>{item?.designation} - {item?.company}</Text>
+                    <Text style={{ fontFamily: fonts.latoBold, fontSize: (fontSize + 3), marginBottom: 3 }}>{item?.title}</Text>
+                    {/* <Text style={{ fontFamily: fonts.latoRegular, fontSize: (fontSize - 2) }}>{item?.designation} - {item?.company}</Text> */}
+                    <Text style={{ fontFamily: fonts.latoRegular, fontSize: (fontSize - 1) }}>{item?.designation}</Text>
+                    <Text style={{ fontFamily: fonts.latoRegular, fontSize: (fontSize - 1), color: colors.primary, marginTop: 2 }}>{item?.company}</Text>
+                    {props?.showSalary && <Text style={{ fontFamily: fonts.latoRegular, fontSize: (fontSize - 2), marginTop: 2 }}>Monthly <Text style={{ fontFamily: fonts.latoBold }}>{parseInt(59000).toLocaleString()} - {parseInt(100000).toLocaleString()} USD</Text></Text>}
                     {/* <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8 }}> */}
                     {/* <Text style={{ fontFamily: fonts.latoRegular, fontSize: (fontSize - 3) }}>Full Time / Permanent</Text>
                         <View style={{ width: 1, height: 10, backgroundColor: '#999', marginHorizontal: 7, marginBottom: -2 }} />

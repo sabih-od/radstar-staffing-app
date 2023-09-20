@@ -33,6 +33,23 @@ const Profile = props => {
 
   const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    // props.route.params?.fromcandidate && props.navigation.setOptions({
+    //   headerRight: () => <View style={{ flexDirection: 'row' }}>
+    //     {!props.isCandidate && <TouchableOpacity
+    //       activeOpacity={0.8}
+    //       onPress={() => {
+    //         alert('Resume Downloaded Successfully');
+    //         // props.navigation.navigate('Notifications');
+    //       }}
+    //       style={[globalstyle.notibadge, { width: 20 }]}>
+    //       <Icon name={'download-cloud'} size={20} color={colors.black} />
+    //       {/* {props.notificationBadge > 0 && <View style={globalstyle.badge}></View>} */}
+    //     </TouchableOpacity>}
+    //   </View>
+    // })
+  }, [])
+
   // useEffect(() => {
   //   console.log('Profile props.userInfo => ', props.userInfo);
   //   setUser(props.userInfo);
@@ -156,7 +173,36 @@ const Profile = props => {
                 // 'Kalen Parker'
               }</Text>
               <Text style={{ fontFamily: fonts.latoRegular, fontSize: (fontSize + 2), textAlign: 'center', color: colors.primary, marginBottom: 3 }}>{user?.designation}</Text>
-              <Text style={{ fontFamily: fonts.latoRegular, fontSize: (fontSize), textAlign: 'center', color: colors.grey, marginBottom: 30 }}>{user?.company}</Text>
+              <Text style={{ fontFamily: fonts.latoRegular, fontSize: (fontSize), textAlign: 'center', color: colors.grey, }}>{user?.company}</Text>
+
+              <View style={{ marginBottom: 15 }} />
+
+
+              {props.route.params?.fromcandidate && <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
+                <TouchableOpacity onPress={() => { }} style={{ paddingVertical: 10, height: 35, paddingHorizontal: 15, marginHorizontal: 2, backgroundColor: colors.primary, borderRadius: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                  <Text style={{ fontFamily: fonts.latoRegular, color: colors.white, textTransform: 'uppercase', fontSize: fontSize - 1, textAlign: 'center' }}>Shortlist</Text><Icon name="info" style={{ color: colors.white, fontSize: fontSize + 1, marginLeft: 6 }} />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => { }} style={{ paddingVertical: 10, height: 35, paddingHorizontal: 15, marginHorizontal: 2, backgroundColor: colors.primary, borderRadius: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                  <Text style={{ fontFamily: fonts.latoRegular, color: colors.white, textTransform: 'uppercase', fontSize: fontSize - 1, textAlign: 'center' }}>Reject</Text><Icon name="x" style={{ color: colors.white, fontSize: fontSize + 1, marginLeft: 6 }} />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => { }} style={{ paddingVertical: 10, height: 35, paddingHorizontal: 15, marginHorizontal: 2, backgroundColor: colors.green, borderRadius: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                  <Text style={{ fontFamily: fonts.latoRegular, color: colors.white, textTransform: 'uppercase', fontSize: fontSize - 1, textAlign: 'center' }}>Hired</Text><Icon name="check" style={{ color: colors.white, fontSize: fontSize + 1, marginLeft: 6 }} />
+                </TouchableOpacity>
+                {/* <TouchableOpacity onPress={() => { }} style={{ paddingVertical: 10, height: 35, paddingHorizontal: 15, marginHorizontal: 2, backgroundColor: colors.black, borderRadius: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                  <Text style={{ fontFamily: fonts.latoRegular, color: colors.white, textTransform: 'uppercase', fontSize: fontSize - 1, textAlign: 'center' }}>Download</Text><Icon name="download-cloud" style={{ color: colors.white, fontSize: fontSize + 1, marginLeft: 6 }} />
+                </TouchableOpacity> */}
+              </View>}
+
+              {user?.id != props?.userInfo?.id && !props.route.params?.fromcandidate && <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
+                <TouchableOpacity onPress={() => { }} style={{ paddingVertical: 10, width: 110, height: 35, paddingHorizontal: 15, marginHorizontal: 5, backgroundColor: colors.black, borderRadius: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                  <Text style={{ fontFamily: fonts.latoRegular, color: colors.white, textTransform: 'uppercase', fontSize: fontSize - 1, textAlign: 'center' }}>Report</Text><Icon name="info" style={{ color: colors.white, fontSize: fontSize + 1, marginLeft: 6 }} />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => { }} style={{ paddingVertical: 10, width: 110, height: 35, paddingHorizontal: 15, marginHorizontal: 5, backgroundColor: colors.primary, borderRadius: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                  <Text style={{ fontFamily: fonts.latoRegular, color: colors.white, textTransform: 'uppercase', fontSize: fontSize - 1, textAlign: 'center' }}>Follow</Text><Icon name="thumbs-up" style={{ color: colors.white, fontSize: fontSize + 1, marginLeft: 6 }} />
+                </TouchableOpacity>
+              </View>}
+
+              <View style={{ marginBottom: 15 }} />
 
               <View style={{ backgroundColor: colors.white, padding: 20, borderRadius: 15 }}>
                 <View style={[{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 30, marginTop: 10, }, user?.id != props.userInfo.id && { width: '100%', alignSelf: 'center' }]}>
@@ -172,7 +218,7 @@ const Profile = props => {
                   {user?.id != props.userInfo.id && <><View style={{ width: 1, height: 20, backgroundColor: '#888' }} />
                     <View style={{ alignItems: 'center', width: '33%', backgroundColor: colors.white, alignItems: 'center', justifyContent: 'center' }}>
                       <Text style={{ fontFamily: fonts.latoBold, fontSize: fontSize + 6, marginBottom: 3 }}>{convertToK(5298)}</Text>
-                      <Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize }}>Follwers</Text>
+                      <Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize }}>Followers</Text>
                     </View></>}
                   {user?.id == props.userInfo.id && <><View style={{ width: 1, height: 20, backgroundColor: '#888' }} />
                     <View style={{ alignItems: 'center', width: '33%', backgroundColor: colors.white, alignItems: 'center', justifyContent: 'center' }}>
@@ -340,6 +386,7 @@ const styles = StyleSheet.create({
 
 const setStateToProps = state => ({
   userInfo: state.appstate.userInfo,
+  isCandidate: state.appstate.isCandidate,
   deleteUserResponse: state.userstate.deleteUserResponse,
 });
 
