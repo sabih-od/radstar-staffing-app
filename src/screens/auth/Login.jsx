@@ -77,7 +77,8 @@ const Login = (props) => {
         // console.log('props.loginResponse => ', props.loginResponse);
         if (props.loginResponse !== prevLoginResponseRef.current && props.loginResponse?.success && props.loginResponse?.data) {
             prevLoginResponseRef.current = props.loginResponse;
-            props.SetUserInfo(props.loginResponse?.data);
+            const userinfo = { ...props.loginResponse?.data, access_token: props.loginResponse?.access_token }
+            props.SetUserInfo(userinfo);
             console.log('props.loginResponse => ', props.loginResponse);
             // showToast();
             props.SetIsLogin(true);
@@ -141,10 +142,44 @@ const Login = (props) => {
                     <View style={isIPad && globalstyle.authscreencontainer}>
                         <View style={globalstyle.authLogoContainer}>
                             {/* <Image source={require('./../../../assets/images/logo-with-text.png')} style={globalstyle.authLogo} /> */}
-                            <Logo width={160} height={140} style={{marginBottom: 25}} />
+                            <Logo width={160} height={140} style={{ marginBottom: 25 }} />
                             <Text style={globalstyle.authheading}>Login</Text>
                             <Text style={globalstyle.authdescription}>Add Your Details to Login</Text>
                         </View>
+
+                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 0, marginBottom: 5 }}>
+                            <TouchableOpacity
+                                activeOpacity={0.8}
+                                onPress={() => {
+                                    setRoleType(true);
+                                    setValue('iscandidate', 1);
+                                }}
+                                style={{
+                                    alignItems: 'center', flexDirection: 'row', alignItems: 'center', paddingHorizontal: 22, paddingVertical: 10, borderRadius: 10, backgroundColor: isCandidate == true ? colors.primary : '#ddd', borderTopRightRadius: 0, borderBottomRightRadius: 0
+                                }}
+                            >
+                                {/* <Icon name={isCandidate == true ? 'check-circle' : 'circle'} style={{ marginRight: 10, fontSize: 17, color: colors.primary }} /> */}
+                                <Text style={{ color: isCandidate == true ? colors.white : colors.black, fontFamily: fonts.latoBold, textTransform: 'uppercase', fontSize: fontSize + 1 }}>Candidate</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                activeOpacity={0.8}
+                                onPress={() => {
+                                    setRoleType(false);
+                                    setValue('iscandidate', 0);
+                                }}
+                                style={{ alignItems: 'center', flexDirection: 'row', alignItems: 'center', paddingHorizontal: 22, paddingVertical: 10, borderRadius: 10, backgroundColor: !isCandidate == true ? colors.primary : '#ddd', borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
+                            >
+                                {/* <Icon name={!isCandidate == true ? 'check-circle' : 'circle'} style={{ marginRight: 10, fontSize: 17, color: colors.primary }} /> */}
+                                <Text style={{ color: !isCandidate == true ? colors.white : colors.black, fontFamily: fonts.latoBold, textTransform: 'uppercase', fontSize: fontSize + 1 }}>Employer</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <TextInput
+                            style={{ display: 'none' }}
+                            {...register('iscandidate', {
+                                value: isCandidate ? '1' : '0',
+                            })}
+                            defaultValue={isCandidate ? '1' : '0'}
+                        />
 
                         {/* <View style={{
                             flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 20,
@@ -174,14 +209,14 @@ const Login = (props) => {
                                 placeholder="Email Address"
                                 // value=''
                                 {...register('email', {
-                                    value: isCandidate ? 'kalenparker@mailinator.com' : 'admin@healthsphere.com',
+                                    value: isCandidate ? 'kalenparker@mailinator.com' : 'healthspheresolutions@mailinator.com',
                                     required: 'Email Address is required',
                                     pattern: {
                                         value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
                                         message: "Please provide valid email"
                                     },
                                 })}
-                                defaultValue={isCandidate ? 'kalenparker@mailinator.com' : 'admin@healthsphere.com'}
+                                defaultValue={isCandidate ? 'kalenparker@mailinator.com' : 'healthspheresolutions@mailinator.com'}
                                 placeholderTextColor={colors.placeholdercolor}
                                 autoCapitalize='none'
                                 onChangeText={(value) => setValue('email', value)}
@@ -231,7 +266,7 @@ const Login = (props) => {
                             </TouchableOpacity>
                         </View>
                         {errors.password && <Text style={globalstyle.errorField}>{errors.password.message}</Text>}
-
+                        {/* 
                         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20, marginBottom: 15 }}>
                             <TouchableOpacity
                                 activeOpacity={0.8}
@@ -239,7 +274,7 @@ const Login = (props) => {
                                 style={{ alignItems: 'center', flexDirection: 'row', alignItems: 'center', marginRight: 30 }}
                             >
                                 <Icon name={isCandidate == true ? 'check-circle' : 'circle'} style={{ marginRight: 10, fontSize: 17, color: colors.primary }} />
-                                <Text style={{ color: colors.black, fontFamily: fonts.latoBold, fontSize: fontSize+1 }}>Candidate</Text>
+                                <Text style={{ color: colors.black, fontFamily: fonts.latoBold, fontSize: fontSize + 1 }}>Candidate</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 activeOpacity={0.8}
@@ -247,9 +282,9 @@ const Login = (props) => {
                                 style={{ alignItems: 'center', flexDirection: 'row', alignItems: 'center', }}
                             >
                                 <Icon name={!isCandidate == true ? 'check-circle' : 'circle'} style={{ marginRight: 10, fontSize: 17, color: colors.primary }} />
-                                <Text style={{ color: colors.black, fontFamily: fonts.latoBold, fontSize: fontSize+1 }}>Employer</Text>
+                                <Text style={{ color: colors.black, fontFamily: fonts.latoBold, fontSize: fontSize + 1 }}>Employer</Text>
                             </TouchableOpacity>
-                        </View>
+                        </View> */}
 
                         <TouchableOpacity
                             activeOpacity={0.8}
@@ -267,8 +302,8 @@ const Login = (props) => {
                         </View>
                     </View>
                 </TouchableWithoutFeedback>
-            </KeyboardAvoidingView>
-        </View>
+            </KeyboardAvoidingView >
+        </View >
         {/* </ScrollView> */}
     </SafeAreaView >
 }

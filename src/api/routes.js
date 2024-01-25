@@ -1,11 +1,36 @@
-export const LoginAPI = '/auth/login';
-export const RegisterAPI = '/auth/signup';
-export const ForgetPassAPI = '/auth/forgot-password';
+/* Candidate */
+export const CandidateLoginAPI = '/candidate/login';
+export const CandidateRegisterAPI = '/candidate/register';
+export const CandidateForgetPassAPI = '/candidate/password/email';
+export const CandidateSubmitOtpAPI = '/candidate/verify/otp';
+export const CandidateResetPassAPI = '/candidate/password/reset';
+export const CandidateProfileAPI = '/candidate/my-profile';
+
+/* Employer */
+export const EmployerLoginAPI = '/company/login';
+export const EmployerRegisterAPI = '/company/register';
+export const EmployerForgetPassAPI = '/company/password/email';
+export const EmployerSubmitOtpAPI = '/company/verify/otp';
+export const EmployerResetPassAPI = '/company/password/reset';
+export const EmployerFollowersAPI = '/company/followers';
+export const EmployerPostedJobsAPI = '/company/job/get';
+export const EmployerCreateJobAPI = '/company/job/create';
+export const EmployerUpdateProfileAPI = '/company/job/update';
+
+
+/* Common */
+export const GetStatesAPI = '/states/{CountryId}';
+export const GetCitiesAPI = '/cities/{stateId}';
+
+
+
+
+
+
+
+
 export const UpdateProfilePictureAPI = '/auth/upload-profile-picture';
 
-export const SubmitOTPAPI = '/auth/submit-otp';
-export const ResendOTPAPI = '/auth/resend-otp';
-export const ResetPasswordAPI = '/auth/reset-password';
 export const GetProfileAPI = '/auth/me';
 export const BlockedUsersListAPI = '/auth/blocked-users';
 export const BlockUserAPI = '/auth/block-user';

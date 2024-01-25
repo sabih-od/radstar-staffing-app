@@ -36,8 +36,8 @@ const SelectModal = (props) => {
         } else {
             setfilteredList(props.list);
         }
-
     }
+
 
     return (
         <View style={styles.centeredView}>
@@ -50,18 +50,18 @@ const SelectModal = (props) => {
             >
                 <View style={{ ...StyleSheet.absoluteFillObject, zIndex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                     <TouchableOpacity onPress={() => { setVisible(false) }} activeOpacity={1} style={{ ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(0, 0, 0, 0.7)' }}></TouchableOpacity>
-                    <View style={{ backgroundColor: colors.white, borderRadius: 7, overflow: 'hidden', maxWidth: isIPad ? '70%' : '90%', maxHeight: height / 1.3 }}>
+                    <View style={styles.modalbox}>
                         <Text style={[globalstyle.modaltitle, { marginBottom: 10 }]}>{props.placeholder}</Text>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#f1f1f1', marginHorizontal: 15, borderRadius: 10, marginBottom: 13 }}>
-                            <View style={{ width: 40, height: 40, alignItems: 'center', justifyContent: 'center' }}><Icon name="search" style={{ fontSize: fontSize + 2, color: colors.grey }} /></View>
+                        <View style={styles.searchbar}>
+                            <View style={styles.iconbox}><Icon name="search" style={styles.searchicon} /></View>
                             <TextInput
                                 onChangeText={value => _handleSearch(value)}
                                 placeholderTextColor={colors.placeholdercolor}
                                 placeholder='Search Here...'
-                                style={{ fontFamily: fonts.latoRegular, paddingVertical: 10, width: '84%' }}
+                                style={styles.searchinput}
                             />
                         </View>
-                        <ScrollView contentContainerStyle={{ flexGrow: 1 }} style={{ backgroundColor: '#ddd', }}>
+                        <ScrollView style={{ flexGrow: 0 }}>
                             {filteredList && filteredList.map((item, index) => {
                                 return (
                                     <TouchableOpacity
@@ -72,7 +72,7 @@ const SelectModal = (props) => {
                                             props.onSelect(item);
                                         }}
                                         activeOpacity={0.8}
-                                        style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', paddingVertical: 13, paddingHorizontal: 15, backgroundColor: index % 2 ? '#f7f7f7' : colors.white }}>
+                                        style={[styles.itembox, { backgroundColor: index % 2 ? '#f7f7f7' : colors.white }]}>
                                         <Icon name={item.id == props.selected ? "check-circle" : "circle"} style={{ color: item.id == props.selected ? colors.primary : '#999', marginRight: 13, fontSize: 16 }} />
                                         <Text style={{ fontFamily: fonts.latoRegular }}>{item.title}</Text>
                                     </TouchableOpacity>
@@ -104,5 +104,11 @@ const SelectModal = (props) => {
 export default SelectModal;
 
 const styles = StyleSheet.create({
+    modalbox: { backgroundColor: colors.white, borderRadius: 7, overflow: 'hidden', maxWidth: isIPad ? '70%' : '90%', maxHeight: height / 1.3 },
+    itembox: { flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', paddingVertical: 13, paddingHorizontal: 15, },
 
+    searchbar: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#f1f1f1', marginHorizontal: 15, borderRadius: 10, marginBottom: 13 },
+    searchinput: { fontFamily: fonts.latoRegular, paddingVertical: 10, width: '84%' },
+    iconbox: { width: 40, height: 40, alignItems: 'center', justifyContent: 'center' },
+    searchicon: { fontSize: fontSize + 2, color: colors.grey }
 })

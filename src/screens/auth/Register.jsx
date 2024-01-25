@@ -19,7 +19,7 @@ const Register = (props) => {
     const [showPassword, setShowPassword] = useState(false);
     const [loading, isLoading] = useState(false);
     const [isChecked, setChecked] = useState(false);
-    const { handleSubmit, formState: { errors }, register, setValue } = useForm();
+    const { handleSubmit, formState: { errors }, register, setValue, unregister, getValues } = useForm();
 
     const prevResgisterResponseRef = useRef(props.registerResponse);
 
@@ -37,13 +37,16 @@ const Register = (props) => {
     const onSubmit = (data) => {
         if (isChecked) {
             console.log('data => ', data)
-            props.RegisterApiCall(data)
-            isLoading(true);
+            // props.RegisterApiCall(data)
+            // isLoading(true);
         } else {
             showToast('success', 'Please read and agree with terms and conditions')
         }
     }
 
+    const firstname = useRef();
+    const middlename = useRef();
+    const lastname = useRef();
     const input01 = useRef();
     const input02 = useRef();
     const input03 = useRef();
@@ -52,6 +55,30 @@ const Register = (props) => {
 
     const [showTermsModal, setShowTermsModal] = useState(false);
     const [isCandidate, setRoleType] = useState(true);
+
+
+    useEffect(() => {
+        // @ts-ignore
+
+        if (isCandidate) {
+            console.log("unregister");
+            // const values = getValues();
+            // console.log('getValues() => ', values)
+            // reset({ ...getValues(), first_name: undefined, last_name: undefined });
+            unregister(["name"]);
+            register("first_name", { required: 'First name is required', pattern: { value: /^[A-Za-z\s]+$/i, message: "Please provide a valid first name" }, });
+            register("middle_name", { required: 'Middle name is required', pattern: { value: /^[A-Za-z\s]+$/i, message: "Please provide a valid middle name" }, });
+            register("last_name", { required: 'Last name is required', pattern: { value: /^[A-Za-z\s]+$/i, message: "Please provide a valid last name" }, });
+        } else {
+            console.log("register");
+            // console.log('getValues() => ', getValues())
+            unregister(["first_name", "middle_name", "last_name"]);
+            register("name", { required: 'Company name is required', pattern: { value: /^[A-Za-z\s]+$/i, message: "Please provide a valid name" }, });
+        }
+    }, [isCandidate]);
+
+    // console.log('error => ', errors)
+    // console.log('getValues() => ', getValues())
 
     return <SafeAreaView style={globalstyle.fullview}>
         <Loader isLoading={loading} />
@@ -70,51 +97,102 @@ const Register = (props) => {
                             <Text style={globalstyle.authdescription}>Add Your Details to Sign Up</Text>
                         </View>
                         <View>
-                            <View style={globalstyle.inputbox}>
-                                <Icon color={colors.primary} name={'user'} size={18} />
-                                <TextInput
-                                    style={globalstyle.inputfield}
-                                    placeholder="First Name"
-                                    // defaultValue={'John'}
-                                    placeholderTextColor={colors.placeholdercolor}
-                                    {...register('first_name', {
-                                        // value: 'John',
-                                        required: 'First name is required',
-                                        pattern: {
-                                            value: /^[A-Za-z\s]+$/i,
-                                            message: "Please provide a valid name"
-                                        },
-                                    })}
-                                    onChangeText={(value) => setValue('first_name', value)}
-                                    ref={input01}
-                                    returnKeyType="next"
-                                    onSubmitEditing={() => input02.current.focus()}
-                                />
-                            </View>
-                            {errors.first_name && <Text style={globalstyle.errorField}>{errors.first_name.message}</Text>}
-                            <View style={globalstyle.inputbox}>
-                                <Icon color={colors.primary} name={'user'} size={18} />
-                                <TextInput
-                                    style={globalstyle.inputfield}
-                                    placeholder="Last Name"
-                                    // defaultValue={'Canady'}
-                                    placeholderTextColor={colors.placeholdercolor}
-                                    {...register('last_name', {
-                                        // value: 'Canady',
-                                        required: 'Last name is required',
-                                        pattern: {
-                                            value: /^[A-Za-z\s]+$/i,
-                                            message: "Please provide a valid name"
-                                        },
-                                    })}
-                                    onChangeText={(value) => setValue('last_name', value)}
-                                    ref={input02}
-                                    returnKeyType="next"
-                                    onSubmitEditing={() => input03.current.focus()}
-                                />
-                            </View>
-                            {errors.last_name && <Text style={globalstyle.errorField}>{errors.last_name.message}</Text>}
-
+                            {isCandidate && <>
+                                <View style={globalstyle.inputbox}>
+                                    <Icon color={colors.primary} name={'user'} size={18} />
+                                    <TextInput
+                                        style={globalstyle.inputfield}
+                                        placeholder="First Name"
+                                        // defaultValue={'John'}
+                                        placeholderTextColor={colors.placeholdercolor}
+                                        name={"first_name"}
+                                        // {...register('first_name', {
+                                        //     // value: 'John',
+                                        //     required: 'First name is required',
+                                        //     pattern: {
+                                        //         value: /^[A-Za-z\s]+$/i,
+                                        //         message: "Please provide a valid name"
+                                        //     },
+                                        // })}
+                                        onChangeText={(value) => setValue('first_name', value)}
+                                        ref={input01}
+                                        returnKeyType="next"
+                                        onSubmitEditing={() => input02.current.focus()}
+                                    />
+                                </View>
+                                {errors.first_name && <Text style={globalstyle.errorField}>{errors.first_name.message}</Text>}
+                                <View style={globalstyle.inputbox}>
+                                    <Icon color={colors.primary} name={'user'} size={18} />
+                                    <TextInput
+                                        style={globalstyle.inputfield}
+                                        placeholder="Middle Name"
+                                        // defaultValue={'John'}
+                                        placeholderTextColor={colors.placeholdercolor}
+                                        name={"middle_name"}
+                                        // {...register('middle_name', {
+                                        //     // value: 'John',
+                                        //     required: 'Middle name is required',
+                                        //     pattern: {
+                                        //         value: /^[A-Za-z\s]+$/i,
+                                        //         message: "Please provide a valid name"
+                                        //     },
+                                        // })}
+                                        onChangeText={(value) => setValue('middle_name', value)}
+                                        ref={input01}
+                                        returnKeyType="next"
+                                        onSubmitEditing={() => input02.current.focus()}
+                                    />
+                                </View>
+                                {errors.middle_name && <Text style={globalstyle.errorField}>{errors.middle_name.message}</Text>}
+                                <View style={globalstyle.inputbox}>
+                                    <Icon color={colors.primary} name={'user'} size={18} />
+                                    <TextInput
+                                        style={globalstyle.inputfield}
+                                        placeholder="Last Name"
+                                        // defaultValue={'Canady'}
+                                        placeholderTextColor={colors.placeholdercolor}
+                                        name={"last_name"}
+                                        // {...register('last_name', {
+                                        //     // value: 'Canady',
+                                        //     required: 'Last name is required',
+                                        //     pattern: {
+                                        //         value: /^[A-Za-z\s]+$/i,
+                                        //         message: "Please provide a valid name"
+                                        //     },
+                                        // })}
+                                        onChangeText={(value) => setValue('last_name', value)}
+                                        ref={input02}
+                                        returnKeyType="next"
+                                        onSubmitEditing={() => input03.current.focus()}
+                                    />
+                                </View>
+                                {errors.last_name && <Text style={globalstyle.errorField}>{errors.last_name.message}</Text>}
+                            </>}
+                            {!isCandidate && <>
+                                <View style={globalstyle.inputbox}>
+                                    <Icon color={colors.primary} name={'user'} size={18} />
+                                    <TextInput
+                                        style={globalstyle.inputfield}
+                                        placeholder="Company Name"
+                                        // defaultValue={'John'}
+                                        placeholderTextColor={colors.placeholdercolor}
+                                        name={"name"}
+                                        // {...register('name', {
+                                        //     // value: 'John',
+                                        //     required: 'Company name is required',
+                                        //     pattern: {
+                                        //         value: /^[A-Za-z\s]+$/i,
+                                        //         message: "Please provide a valid name"
+                                        //     },
+                                        // })}
+                                        onChangeText={(value) => setValue('name', value)}
+                                        ref={input01}
+                                        returnKeyType="next"
+                                        onSubmitEditing={() => input02.current.focus()}
+                                    />
+                                </View>
+                                {errors.name && <Text style={globalstyle.errorField}>{errors.name.message}</Text>}
+                            </>}
                             <View style={globalstyle.inputbox}>
                                 <Icon color={colors.primary} name={'mail'} size={18} />
                                 <TextInput
@@ -139,7 +217,7 @@ const Register = (props) => {
                             </View>
                             {errors.email && <Text style={globalstyle.errorField}>{errors.email.message}</Text>}
 
-                            <View style={globalstyle.inputbox}>
+                            {/* <View style={globalstyle.inputbox}>
                                 <Icon color={colors.primary} name={'phone'} size={18} />
                                 <TextInput
                                     style={globalstyle.inputfield}
@@ -162,7 +240,7 @@ const Register = (props) => {
                                     onSubmitEditing={() => input05.current.focus()}
                                 />
                             </View>
-                            {errors.phone && <Text style={globalstyle.errorField}>{errors.phone.message}</Text>}
+                            {errors.phone && <Text style={globalstyle.errorField}>{errors.phone.message}</Text>} */}
 
                             <View style={[globalstyle.inputbox, { justifyContent: 'space-between' }]}>
                                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>

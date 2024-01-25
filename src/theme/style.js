@@ -33,7 +33,7 @@ const globalstyle = StyleSheet.create({
   footerloadingtext: { fontFamily: fonts.latoRegular, marginLeft: 8, },
 
   modaltitle: { fontFamily: fonts.latoBold, color: colors.black, textAlign: 'center', paddingTop: 15, paddingBottom: 5, fontSize: isIPad ? 24 : 18, color: colors.black },
-  modaldesc: { fontFamily: fonts.latoRegular, color: colors.black, textAlign: 'center', fontSize: isIPad ? 16 : 13, paddingHorizontal: 15, paddingBottom: 15, color: '#444' },
+  modaldesc: { fontFamily: fonts.latoRegular, color: colors.black, textAlign: 'center', fontSize: isIPad ? fontSize + 2 : fontSize - 1, paddingHorizontal: 15, paddingBottom: 15, color: '#444', lineHeight: fontSize + 3 },
   modalbtnsrow: { flexDirection: 'row', alignItems: 'center', borderTopColor: '#ddd', borderTopWidth: 1, },
   modalbtntext: { fontFamily: fonts.latoRegular, color: colors.black, textAlign: 'center', paddingVertical: 14, textAlign: 'center', fontSize: isIPad ? 18 : 14 },
   modalbtn: { width: '50%', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' },

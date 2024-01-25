@@ -135,7 +135,7 @@ const MainStackNavigation = (props) => {
                     headerTitle: 'Company Profile',
                     headerTitleAlign: 'center',
                     headerTitleStyle: globalstyle.headerTitleStyle,
-                    headerLeft: () => <DrawerIcon navigation={navigation} />,
+                    // headerLeft: () => <DrawerIcon navigation={navigation} />,
                     headerRight: () => <NotificationIcon navigation={navigation} />
                 }}
             />
@@ -156,7 +156,8 @@ const MainStackNavigation = (props) => {
                     headerTitle: 'Change Password',
                     headerTitleAlign: 'center',
                     headerTitleStyle: globalstyle.headerTitleStyle,
-                    headerLeft: () => <DrawerIcon navigation={navigation} />,
+                    // headerLeft: () => <DrawerIcon navigation={navigation} />,
+                    headerLeft: () => <GoBackIcon navigation={navigation} />,
                     headerRight: () => <NotificationIcon navigation={navigation} />
                 }}
             />

@@ -19,8 +19,11 @@ const initialState = {
 // Login Api Call
 export function LoginApiCall(params) {
     console.log('params => ', params);
+    const url = params.isCandidate == 1 ? '/candidate/login' : '/company/login';
+    console.log('url => ', url)
     return apiAction({
-        url: LoginAPI,
+        // url: LoginAPI,
+        url: url,
         method: 'POST',
         data: params,
         onSuccess: (response) => {

@@ -19,6 +19,7 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import CameraModal from '../../../components/modal/CameraModal';
+import DocumentPicker from 'react-native-document-picker'
 
 // import auth from '@react-native-firebase/auth';
 // import analytics from '@react-native-firebase/analytics';
@@ -397,6 +398,20 @@ const EditProfile = props => {
     console.log('item => ', item)
     setShowEducation(item)
   }
+
+  const [fileResponse, setFileResponse] = useState([]);
+  const handleDocumentSelection = useCallback(async () => {
+    try {
+      const response = await DocumentPicker.pick({
+        presentationStyle: 'fullScreen',
+      });
+      setFileResponse(response);
+    } catch (err) {
+      console.log('err => ', err)
+      // console.warn(err);
+    }
+  }, []);
+
 
   return (
     <>
@@ -844,7 +859,7 @@ const EditProfile = props => {
                     <SectionTitle title={"Summary"} />
                     <View style={[globalstyle.inputbox, { paddingHorizontal: 0, }, { alignItems: 'flex-start', paddingTop: 15 }]}>
                       <TextInput
-                        style={[globalstyle.inputfield, { height: 130 }]}
+                        style={[globalstyle.inputfield, { height: 140, lineHeight: fontSize + 7 }]}
                         multiline={true}
                         placeholder="Write a breif profile summary"
                         defaultValue={user?.summary}
@@ -885,7 +900,7 @@ const EditProfile = props => {
                     </View>
 
                     <View style={{ height: 30 }} />
-                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 0 }}>
                       <View style={{ width: width - 70 }}>
                         <SectionTitle title={"Documents"} />
                         <Text style={{ fontFamily: fonts.latoRegular, color: colors.grey, marginTop: -7, marginBottom: 10, fontSize: fontSize - 1 }}>All documents must be uploaded for job application submission eligibility.</Text>
@@ -894,10 +909,8 @@ const EditProfile = props => {
                         <Icon name="plus" style={{ color: colors.white }} />
                       </TouchableOpacity> */}
                     </View>
-
                     {documents && documents.map((item, index) => {
-
-                      return <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 15, paddingVertical: 13, backgroundColor: item?.id % 2 == 0 ? '#fff' : '#f1f1f1', marginHorizontal: -15 }}>
+                      return <TouchableOpacity activeOpacity={0.8} onPress={() => { handleDocumentSelection() }} style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 15, paddingVertical: 13, backgroundColor: item?.id % 2 == 0 ? '#fff' : '#f1f1f1', marginHorizontal: -15 }}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                           <Icon name={item.url == '' ? "circle" : "check-circle"} style={{ color: colors.primary, fontSize: fontSize, marginRight: 10 }} />
                           <Text style={{ fontFamily: fonts.latoRegular }}> {item?.title}</Text>
@@ -917,8 +930,8 @@ const EditProfile = props => {
 
 
 
-                    <View style={{ height: 1, backgroundColor: '#ddd', marginTop: 10, marginBottom: 15 }} />
-                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
+                    {/* <View style={{ height: 1, backgroundColor: '#ddd', marginTop: 10, marginBottom: 15 }} /> */}
+                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10, marginTop: 30, }}>
                       <View style={{ width: width - 70 }}>
                         <SectionTitle title={"Experience"} />
                         <Text style={{ fontFamily: fonts.latoRegular, color: colors.grey, marginTop: -7, marginBottom: 10, fontSize: fontSize - 1 }}>Add experience according to your job.</Text>
@@ -932,7 +945,7 @@ const EditProfile = props => {
                     </View>
                     {showExperience && <AddExperience item={showExperience} />}
                     {user?.experience && user?.experience.map((item, index) => {
-                      return <ExperienceItem key={index} item={item} showTrash={true} handleEdit={_handleEditEducation} />
+                      return <ExperienceItem key={index} item={item} showTrash={true} handleEdit={_handleEditExperience} />
                     })}
 
                     <View style={{ height: 1, backgroundColor: '#ddd', marginTop: 10, marginBottom: 15 }} />
@@ -943,7 +956,7 @@ const EditProfile = props => {
                       </View>
                       <TouchableOpacity
                         activeOpacity={0.9}
-                        onPress={() => setShowEducation(true)}
+                        onPress={() => setShowEducation(prev => !prev)}
                         style={{ width: 30, height: 30, borderRadius: 10, marginTop: 0, backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
                         <Icon name={showEducation ? "minus" : "plus"} style={{ color: colors.white }} />
                       </TouchableOpacity>
@@ -952,7 +965,7 @@ const EditProfile = props => {
 
                     {showEducation && <AddExperience item={showEducation} />}
                     {user?.education && user?.education.map((item, index) => {
-                      return <ExperienceItem key={index} item={item} education={true} showTrash={true} handleEdit={_handleEditExperience} />
+                      return <ExperienceItem key={index} item={item} education={true} showTrash={true} handleEdit={_handleEditEducation} />
                     })}
 
                     <View style={{ height: 1, backgroundColor: '#ddd', marginTop: 10, marginBottom: 25 }} />

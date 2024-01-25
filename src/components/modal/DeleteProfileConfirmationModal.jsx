@@ -23,7 +23,7 @@ const DeleteProfileConfirmationModal = ({ visible, handleDeleteConfirmValue, set
                 <TouchableOpacity onPress={() => { handleDeleteConfirmValue(false) }} activeOpacity={1} style={{ ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(0, 0, 0, 0.7)' }}></TouchableOpacity>
                 <View style={{ backgroundColor: '#fff', borderRadius: 7, width: isIPad ? 470 : '90%', }}>
                     <Text style={globalstyle.modaltitle}>Delete Account</Text>
-                    <Text style={globalstyle.modaldesc}>Are you sure you want to delete your account?</Text>
+                    <Text style={globalstyle.modaldesc}>{`Are you sure you want to delete your account? \nPlease be aware that this action is irreversible and your account cannot be recovered once deleted.`}</Text>
                     <View style={globalstyle.modalbtnsrow}>
                         <TouchableOpacity onPress={() => {
                             handleDeleteConfirmValue(false)

@@ -26,6 +26,7 @@ import { convertToK } from '../../../helpers/services';
 import SectionTitle from '../../../components/SectionTitle';
 import moment from 'moment';
 import ExperienceItem from '../../../components/ExperienceItem';
+import { documents } from '../../../data/documents';
 
 const Profile = props => {
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
@@ -139,7 +140,6 @@ const Profile = props => {
           <View style={styles.container}>
 
             {/* <BlockedUsers passReferenceToParent={handleChildReference} /> */}
-            <DeleteProfileConfirmationModal handleDeleteConfirmValue={_handleDeleteConfirmValue} visible={showConfirmationModal} setVisible={setShowConfirmationModal} />
             <BlockedUsersListModal visible={showBlockedUsers} setVisible={setShowBlockedUsers} />
             {/* <View style={{ backgroundColor: colors.primary, height: 400, width: '100%', top: 0, position: 'absolute', }}></View> */}
             <View style={[{ paddingVertical: 20, paddingHorizontal: 15 }, isIPad && globalstyle.authscreencontainer, { marginTop: 'auto', marginBottom: 'auto' }]}>
@@ -169,7 +169,7 @@ const Profile = props => {
                   </TouchableOpacity>}
               </View>
               <Text style={{ fontFamily: fonts.latoBold, fontSize: (fontSize + 6), textAlign: 'center', color: colors.black, marginBottom: 6 }}>{
-                user?.id == props.userInfo.id ? `${user?.first_name} ${user?.last_name}` : user?.title
+                user?.id == props?.userInfo?.id ? `${user?.first_name} ${user?.last_name}` : user?.title
                 // 'Kalen Parker'
               }</Text>
               <Text style={{ fontFamily: fonts.latoRegular, fontSize: (fontSize + 2), textAlign: 'center', color: colors.primary, marginBottom: 3 }}>{user?.designation}</Text>
@@ -205,22 +205,22 @@ const Profile = props => {
               <View style={{ marginBottom: 15 }} />
 
               <View style={{ backgroundColor: colors.white, padding: 20, borderRadius: 15 }}>
-                <View style={[{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 30, marginTop: 10, }, user?.id != props.userInfo.id && { width: '100%', alignSelf: 'center' }]}>
-                  <View style={{ alignItems: 'center', width: user?.id != props.userInfo.id ? '33%' : '33%', backgroundColor: colors.white, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={[{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 30, marginTop: 10, }, user?.id != props?.userInfo?.id && { width: '100%', alignSelf: 'center' }]}>
+                  <View style={{ alignItems: 'center', width: user?.id != props?.userInfo?.id ? '33%' : '33%', backgroundColor: colors.white, alignItems: 'center', justifyContent: 'center' }}>
                     <Text style={{ fontFamily: fonts.latoBold, fontSize: fontSize + 6, marginBottom: 3 }}>{convertToK(12367)}</Text>
                     <Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize }}>Followings</Text>
                   </View>
                   <View style={{ width: 1, height: 20, backgroundColor: '#888' }} />
-                  <View style={{ alignItems: 'center', width: user?.id != props.userInfo.id ? '33%' : '33%', backgroundColor: colors.white, alignItems: 'center', justifyContent: 'center' }}>
+                  <View style={{ alignItems: 'center', width: user?.id != props?.userInfo?.id ? '33%' : '33%', backgroundColor: colors.white, alignItems: 'center', justifyContent: 'center' }}>
                     <Text style={{ fontFamily: fonts.latoBold, fontSize: fontSize + 6, marginBottom: 3 }}>{convertToK(3122)}</Text>
                     <Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize }}>Profile Views</Text>
                   </View>
-                  {user?.id != props.userInfo.id && <><View style={{ width: 1, height: 20, backgroundColor: '#888' }} />
+                  {user?.id != props?.userInfo?.id && <><View style={{ width: 1, height: 20, backgroundColor: '#888' }} />
                     <View style={{ alignItems: 'center', width: '33%', backgroundColor: colors.white, alignItems: 'center', justifyContent: 'center' }}>
                       <Text style={{ fontFamily: fonts.latoBold, fontSize: fontSize + 6, marginBottom: 3 }}>{convertToK(5298)}</Text>
                       <Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize }}>Followers</Text>
                     </View></>}
-                  {user?.id == props.userInfo.id && <><View style={{ width: 1, height: 20, backgroundColor: '#888' }} />
+                  {user?.id == props?.userInfo?.id && <><View style={{ width: 1, height: 20, backgroundColor: '#888' }} />
                     <View style={{ alignItems: 'center', width: '33%', backgroundColor: colors.white, alignItems: 'center', justifyContent: 'center' }}>
                       <Text style={{ fontFamily: fonts.latoBold, fontSize: fontSize + 6, marginBottom: 3 }}>{convertToK(54)}</Text>
                       <Text style={{ fontFamily: fonts.latoRegular, fontSize: fontSize }}>Jobs Applied</Text>
@@ -289,6 +289,27 @@ const Profile = props => {
                 <Text style={{ fontFamily: fonts.latoRegular, color: colors.grey }}>Drugs Test Form</Text>
                 <Icon name="file" style={{ marginLeft: 5 }} />
               </TouchableOpacity> */}
+
+              <View style={{ height: 15 }} />
+              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 0 }}>
+                <View style={{ width: width - 70 }}>
+                  <SectionTitle title={"Documents"} />
+                  <Text style={{ fontFamily: fonts.latoRegular, color: colors.grey, marginTop: -7, marginBottom: 10, fontSize: fontSize - 1 }}>All documents must be uploaded for job application submission eligibility.</Text>
+                </View>
+              </View>
+              {documents && documents.map((item, index) => {
+                return <TouchableOpacity key={index} activeOpacity={0.9} style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 15, paddingVertical: 13, backgroundColor: item?.id % 2 == 0 ? '#fff' : '#f1f1f1', marginHorizontal: -15 }}>
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Icon name={item.url == '' ? "circle" : "check-circle"} style={{ color: colors.primary, fontSize: fontSize, marginRight: 10 }} />
+                    <Text style={{ fontFamily: fonts.latoRegular }}> {item?.title}</Text>
+                  </View>
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Icon name="eye" style={{ marginLeft: 5, fontSize: fontSize, color: colors.primary }} />
+                  </View>
+                </TouchableOpacity>
+              })}
+
+              <View style={{ height: 30 }} />
 
               <SectionTitle title={"Skills"} />
               <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>

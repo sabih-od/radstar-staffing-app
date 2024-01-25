@@ -1,7 +1,7 @@
 export const employer = {
     id: 48,
     full_name: "HealthSphere Solutions",
-    email: "admin@healthsphere.com",
+    email: "healthspheresolutions@mailinator.com",
     phone: "+8172818372",
     fax: "+8172818372",
     country: 9,
@@ -78,6 +78,7 @@ export const candidate = {
         { id: 1, title: 'English', experience: true },
         { id: 2, title: 'French', experience: true },
     ],
+    summary: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and woo pose edilors now use Lorem losum as their celault mode text and a search for lorem ipsum will uncover many web sites',
     otp: "524566",
     otp_expires_at: null,
     blocked_at: null,
